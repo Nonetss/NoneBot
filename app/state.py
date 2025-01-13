@@ -4,6 +4,6 @@ from typing import TypedDict
 class State(TypedDict):
     user_name: str
     response: str
-    done: bool
+    about: str
     question: str
     pasos: int
