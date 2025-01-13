@@ -1,45 +1,45 @@
-from typing import TypedDict
-
 from langgraph.graph import END, START, StateGraph
 
-# Define the state of the agent
+# Importar nodos y estado
+from app.nodes.chatbot_node import chatbot
+from app.nodes.presentacion_node import presentacion
+from app.nodes.welcome_node import welcome
+from app.state import State
 
-
-class State(TypedDict):
-    my_var: str
-    customer_name: str
-
-
-# Define nodes (agent == node)
-
-
-def node_1(state: State) -> State:
-    state["my_var"] = "Hello"
-    state["customer_name"] = "John"
-    return state
-
-
-def node_2(state: State) -> State:
-    customer_name = state["customer_name"]
-    state["my_var"] = f"Hello {customer_name}"
-    return state
-
-
-def node_3(state: State) -> State:
-    return state
-
-
-# Define the graph
-
+# Inicializar el grafo con el estado definido
 builder = StateGraph(State)
 
-builder.add_node("node_1", node_1)
-builder.add_node("node_2", node_2)
-builder.add_node("node_3", node_3)
+# Agregar nodos al grafo
+builder.add_node("welcome", welcome)
+builder.add_node("presentacion", presentacion)
+builder.add_node("chatbot", chatbot)
 
-builder.add_edge(START, "node_1")
-builder.add_edge("node_1", "node_2")
-builder.add_edge("node_2", "node_3")
-builder.add_edge("node_3", END)
 
+# Función corregida para control de flujo
+
+
+def seguimos(state):
+    if state.get("question") == "exit":
+        return True  # Devuelve directamente un valor hashable
+    else:
+        return False
+
+
+# Definir edges del flujo
+builder.add_edge(START, "welcome")
+builder.add_edge("welcome", "presentacion")
+builder.add_edge("presentacion", "chatbot")
+
+# Condición corregida usando booleanos
+builder.add_conditional_edges("chatbot", seguimos, {True: END, False: "chatbot"})
+
+# Compilar el grafo
 graph = builder.compile()
+
+# Estado inicial
+initial_state = {"question": ""}
+while True:
+    initial_state = graph.invoke(initial_state)
+    if initial_state["question"].lower() == "exit":
+        print("¡Hasta luego!")
+        break
