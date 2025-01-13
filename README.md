@@ -14,4 +14,4 @@ El objetivo de este proyecto es desarrollar un bot para mi futuro portafolio, ca
 
 ## Actualmente:
 
-[./static/screenshot_13012025_122759.jpg]
+![Captura de pantalla del proyecto](./static/screenshot_13012025_122759.jpg)
