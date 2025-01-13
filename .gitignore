@@ -4,6 +4,9 @@
 ### LangChaing
 .langgraph_api
 prompts.yaml
+**/info/
+chroma_db
+**/json/
 
 ### Linux ###
 *~
