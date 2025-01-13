@@ -2,44 +2,41 @@ from langgraph.graph import END, START, StateGraph
 
 # Importar nodos y estado
 from app.nodes.chatbot_node import chatbot
-from app.nodes.presentacion_node import presentacion
+from app.nodes.comprobar_decision_node import comprobar_decision
+from app.nodes.decidir_node import decidir
 from app.nodes.welcome_node import welcome
 from app.state import State
+from app.utils.comprobar_decision import check_decision
+from app.utils.exit import exit
 
 # Inicializar el grafo con el estado definido
 builder = StateGraph(State)
 
 # Agregar nodos al grafo
 builder.add_node("welcome", welcome)
-builder.add_node("presentacion", presentacion)
+builder.add_node("decidir", decidir)
+builder.add_node("comprobar_decision", comprobar_decision)
 builder.add_node("chatbot", chatbot)
-
-
-# Función corregida para control de flujo
-
-
-def seguimos(state):
-    if state.get("question") == "exit":
-        return True  # Devuelve directamente un valor hashable
-    else:
-        return False
 
 
 # Definir edges del flujo
 builder.add_edge(START, "welcome")
-builder.add_edge("welcome", "presentacion")
-builder.add_edge("presentacion", "chatbot")
+builder.add_edge("welcome", "decidir")
 
-# Condición corregida usando booleanos
-builder.add_conditional_edges("chatbot", seguimos, {True: END, False: "chatbot"})
+# Condicional simplificado
+builder.add_conditional_edges("decidir", exit, {True: END, False: "comprobar_decision"})
+
+builder.add_conditional_edges(
+    "comprobar_decision", check_decision, {True: "chatbot", False: "comprobar_decision"}
+)
+
+builder.add_edge("chatbot", "decidir")
 
 # Compilar el grafo
 graph = builder.compile()
 
+
 # Estado inicial
-initial_state = {"question": ""}
-while True:
-    initial_state = graph.invoke(initial_state)
-    if initial_state["question"].lower() == "exit":
-        print("¡Hasta luego!")
-        break
+initial_state = {"pasos": 0}
+
+# Bucle de ejecución continua
