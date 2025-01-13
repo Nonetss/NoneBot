@@ -1,20 +1,16 @@
-from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.prompts import PromptTemplate
-
 from app.state import State
-from model.llama import llm
-
-prompt = PromptTemplate(
-    template="{question}",
-    input_variables=["question"],
-)
-
-chat = prompt | llm
+from template.crear_prompts import CrearPrompt
+from template.crear_respuesta import CrearRespuesta
 
 
 def chatbot(state: State):
     question = state["question"]
-    response = chat.invoke({"question": question})
-    print(response)
-    state["question"] = input(f"Tu: ")
+    crear_prompt = CrearPrompt()
+    prompt = crear_prompt.generar_prompt(
+        nombre_prompt="requestDoc", prompt_humano=question
+    )
+    response = CrearRespuesta()
+    result = response.generar_respuesta(prompt)
+    print(result)
+    state["question"] = ""
     return state
