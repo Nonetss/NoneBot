@@ -1,4 +1,3 @@
-import os
 import sys
 
 from langchain_chroma import Chroma
@@ -48,16 +47,3 @@ def buscar_embeding(query, collection_name, top_k=2):
     except Exception as e:
         print(f"Error al realizar la búsqueda en {collection_name}: {e}")
         return None
-
-
-# Ejemplo de búsqueda
-consulta = "NoneNotes"
-coleccion_a_buscar = "codigo"
-resultados = buscar_embeding(consulta, coleccion_a_buscar)
-
-if resultados and "results" in resultados:
-    print(f"\nResultados de la colección: {resultados['collection']}")
-    for doc in resultados["results"]:
-        print(f"Documento: {doc.page_content}")
-else:
-    print(f"\n{resultados['document']}")
