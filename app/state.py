@@ -7,3 +7,4 @@ class State(TypedDict):
     about: str
     question: str
     pasos: int
+    doc: list[str]

@@ -1,6 +1,7 @@
 from langgraph.graph import END, START, StateGraph
 
 # Importar nodos y estado
+from app.nodes.cargar_embeding_node import cargar_embeding
 from app.nodes.chatbot_node import chatbot
 from app.nodes.comprobar_decision_node import comprobar_decision
 from app.nodes.decidir_node import decidir
@@ -16,6 +17,7 @@ builder = StateGraph(State)
 builder.add_node("welcome", welcome)
 builder.add_node("decidir", decidir)
 builder.add_node("comprobar_decision", comprobar_decision)
+builder.add_node("cargar_embeding", cargar_embeding)
 builder.add_node("chatbot", chatbot)
 
 
@@ -27,8 +29,11 @@ builder.add_edge("welcome", "decidir")
 builder.add_conditional_edges("decidir", exit, {True: END, False: "comprobar_decision"})
 
 builder.add_conditional_edges(
-    "comprobar_decision", check_decision, {True: "chatbot", False: "comprobar_decision"}
+    "comprobar_decision",
+    check_decision,
+    {True: "cargar_embeding", False: "comprobar_decision"},
 )
+builder.add_edge("cargar_embeding", "chatbot")
 
 builder.add_edge("chatbot", "decidir")
 
@@ -39,4 +44,4 @@ graph = builder.compile()
 # Estado inicial
 initial_state = {"pasos": 0}
 
-# Bucle de ejecución continua
+initial_state = graph.invoke(initial_state)
