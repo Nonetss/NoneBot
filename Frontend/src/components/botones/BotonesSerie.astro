@@ -1,0 +1,71 @@
+---
+interface Boton {
+  texto: string;
+  enlace: string;
+}
+
+interface Props {
+  botones: Boton[];
+}
+
+const { botones }: Props = Astro.props;
+---
+
+<div class="botones-link">
+  {
+    botones.map((boton) => (
+      <button>
+        <a href={boton.enlace}>
+          <p>{boton.texto}</p>
+          <img src="/assets/link-arrow.svg" alt="" />
+        </a>
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  a {
+    text-align: left;
+    display: flex;
+    padding: 0 10px;
+    width: 100%;
+    padding: 10px 20px;
+  }
+  p {
+    display: block;
+    flex: 1;
+  }
+  img {
+    height: 20px;
+    align-self: center;
+    display: block;
+    filter: invert(0%) sepia(100%) saturate(500%) hue-rotate(200deg); /* Ajusta el color inicial */
+  }
+  .botones-link {
+    display: flex;
+    width: 100%;
+    border: solid 5px #000;
+  }
+
+  .botones-link button {
+    background-color: var(--color-principal);
+    width: 100%;
+    border: none;
+    border-right: solid 5px #000;
+    display: flex;
+  }
+  .botones-link button:last-child() {
+    border-right: none;
+  }
+  .botones-link button:hover() {
+    background-color: #000;
+  }
+
+  .botones-link button a:hover() {
+    color: #fff;
+  }
+  .botones-link button:hover() img {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg); /* Cambia al color deseado */
+  }
+</style>

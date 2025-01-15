@@ -1,0 +1,32 @@
+---
+interface Props {
+  enlace: string;
+  texto: string;
+}
+
+const { enlace, texto }: Props = Astro.props;
+---
+
+<button>
+  <a href={enlace}>{texto}</a>
+</button>
+
+<style>
+  button {
+    background-color: var(--color-principal);
+    border: solid 5px #000;
+  }
+  a {
+    text-align: left;
+    padding: 10px 20px;
+    align-self: flex-start;
+    display: block;
+  }
+  button:hover() {
+    background-color: #000;
+  }
+
+  button a:hover() {
+    color: #fff;
+  }
+</style>
