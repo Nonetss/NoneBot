@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+import Avatar from "@img/avatar.webp";
+import BotonIndi from "@components/botones/BotonIndi.astro";
+import BotonSerie from "@components/botones/BotonesSerie.astro";
+const botones = [
+  { texto: "Proyectos", enlace: "/proyectos" },
+  { texto: "Sobre mi", enlace: "/sobre-mi" },
+  { texto: "Contacto", enlace: "/contacto" },
+];
+---
+
+<section class="contenedor-global">
+  <nav class="contenedor-contenido">
+    <div class="contenedor-intro">
+      <div>
+        <div class="contenedor-saludo">
+          <h1>Hola!</h1>
+          <h1>Soy Antonio</h1>
+          <p>Texto</p>
+        </div>
+        <BotonIndi texto="Hola" enlace="" />
+      </div>
+      <Image
+        src={Avatar}
+        height={200}
+        alt="A bird sitting on a nest of eggs."
+      />
+    </div>
+    <nav class="contenedor-link">
+      <h3>Enlace rapido:</h3>
+      <BotonSerie botones={botones} />
+    </nav>
+  </nav>
+</section>
+
+<style>
+  .contenedor-global {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .contenedor-contenido {
+    width: 80%;
+  }
+  .contenedor-intro {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 200px 0px;
+  }
+  .contenedor-saludo {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+  }
+  .contenedor-intro h1 {
+    margin: 0; /* Elimina los márgenes entre los <h1> */
+    padding: 0; /* Asegura que no haya relleno */
+    line-height: 1.2; /* Ajusta la altura de línea para controlar el espacio vertical */
+  }
+
+  div {
+    width: 50%;
+  }
+  .contenedor-link {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+  }
+  .contenedor-link h3 {
+    text-align: left;
+    align-self: flex-start;
+  }
+</style>

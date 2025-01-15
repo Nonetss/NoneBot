@@ -1,0 +1,44 @@
+---
+import Project from "@components/tarjetas/Proyectos.astro";
+const proyectos = [
+  {
+    nombre: "Proyecto 1",
+    imgEnlace: "/images/proyecto1.jpg",
+    titulo: "Título del Proyecto 1",
+    descripcion: "Descripción breve del proyecto 1.",
+    enlaceProyecto: "",
+  },
+  {
+    nombre: "Proyecto 2",
+    imgEnlace: "/images/proyecto2.jpg",
+    titulo: "Título del Proyecto 2",
+    descripcion: "Descripción breve del proyecto 2.",
+    enlaceProyecto: "",
+  },
+];
+---
+
+<section>
+  <div>
+    <h1>Proyectos</h1>
+    <Project proyectos={proyectos} />
+  </div>
+</section>
+
+<style>
+  section {
+    background-image: url(/assets/pattern-grey.svg);
+    margin-top: 100px;
+    border-top: solid 5px #000;
+    padding-bottom: 200px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  div {
+    width: 80%;
+  }
+  h1 {
+    padding-top: 120px;
+  }
+</style>
