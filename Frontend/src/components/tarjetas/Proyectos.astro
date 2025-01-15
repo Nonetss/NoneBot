@@ -1,0 +1,68 @@
+---
+interface Proyecto {
+  nombre: string;
+  imgEnlace: string;
+  titulo: string;
+  descripcion: string;
+  enlaceProyecto: string;
+}
+
+interface Props {
+  proyectos: Proyecto[];
+}
+
+const { proyectos }: Props = Astro.props;
+import BotonIndi from "@components/botones/BotonIndi.astro";
+---
+
+<nav>
+  {
+    proyectos.map((proyecto) => (
+      <div class="proyecto">
+        <div class="nombre">
+          <p>{proyecto.nombre}</p>
+        </div>
+        <div class="imagen">
+          <img src={proyecto.imgEnlace} alt={`Imagen de ${proyecto.nombre}`} />
+        </div>
+        <div class="detalles">
+          <h3>{proyecto.titulo}</h3>
+          <p>{proyecto.descripcion}</p>
+          <BotonIndi texto="Ver el proyecto" enlace="{enlaceProyecto}" />
+        </div>
+      </div>
+    ))
+  }
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    overflow-x: auto; /* Habilita el scroll horizontal */
+    white-space: nowrap; /* Evita que los elementos salten a la siguiente línea */
+    gap: 200px; /* Espaciado entre proyectos */
+    padding: 16px 0px; /* Espaciado interno para que no se corte el contenido */
+    scrollbar-width: thin; /* Hace la barra de scroll más delgada en navegadores compatibles */
+  }
+
+  .proyecto {
+    overflow: hidden;
+    border: 5px solid #000;
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
+    width: 600px;
+    flex-shrink: 0; /* Evita que los elementos se reduzcan en tamaño */
+  }
+  .nombre {
+    background-color: var(--color-principal);
+    text-align: center;
+    padding: 5px 0px;
+    border-bottom: solid 5px #000;
+  }
+  .imagen {
+    border-bottom: solid 5px #000;
+  }
+  .detalles {
+    padding: 20px;
+    background-color: #fff;
+  }
+</style>
