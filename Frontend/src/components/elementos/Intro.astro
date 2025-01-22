@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import Avatar from "@img/avatar.webp";
+import Avatar from "@img/avatar.png";
 import BotonIndi from "@components/botones/BotonIndi.astro";
 import BotonSerie from "@components/botones/BotonesSerie.astro";
 const botones = [
@@ -25,6 +25,7 @@ const botones = [
         src={Avatar}
         height={200}
         alt="A bird sitting on a nest of eggs."
+        class={"avatar"}
       />
     </div>
     <nav class="contenedor-link">
@@ -76,5 +77,8 @@ const botones = [
   .contenedor-link h3 {
     text-align: left;
     align-self: flex-start;
+  }
+  .avatar {
+    border: 3px solid #000;
   }
 </style>
