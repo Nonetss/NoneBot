@@ -1,5 +1,6 @@
 ---
 import Project from "@components/tarjetas/Proyectos.astro";
+
 const proyectos = [
   {
     nombre: "Proyecto 1",
@@ -15,29 +16,54 @@ const proyectos = [
     descripcion: "Descripción breve del proyecto 2.",
     enlaceProyecto: "",
   },
+  {
+    nombre: "Proyecto 3",
+    imgEnlace: "/images/proyecto2.jpg",
+    titulo: "Título del Proyecto 2",
+    descripcion: "Descripción breve del proyecto 2.",
+    enlaceProyecto: "",
+  },
+  {
+    nombre: "Proyecto 2",
+    imgEnlace: "/images/proyecto2.jpg",
+    titulo: "Título del Proyecto 2",
+    descripcion: "Descripción breve del proyecto 2.",
+    enlaceProyecto: "",
+  },
+  {
+    nombre: "Proyecto 3",
+    imgEnlace: "/images/proyecto2.jpg",
+    titulo: "Título del Proyecto 2",
+    descripcion: "Descripción breve del proyecto 2.",
+    enlaceProyecto: "",
+  },
 ];
 ---
 
 <section>
-  <div>
+  <div class="proyectos-div">
     <h1>Proyectos</h1>
-    <Project proyectos={proyectos} />
+    <div class="lista-proyectos">
+      <Project proyectos={proyectos} />
+    </div>
   </div>
 </section>
 
 <style>
+  /* Estilos locales del componente */
   section {
-    background-image: url(/assets/pattern-grey.svg);
     margin-top: 100px;
     border-top: solid 5px #000;
     padding-bottom: 200px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    width: 100%;
   }
-  div {
+
+  .proyectos-div {
     width: 80%;
   }
+
   h1 {
     padding-top: 120px;
   }
