@@ -1,0 +1,86 @@
+---
+interface Skill {
+  nombre: string;
+  nivel: number;
+  imagen: string;
+}
+
+interface Props {
+  skills: Skill[];
+}
+
+const { skills }: Props = Astro.props;
+---
+
+<div class="skills" id="skill">
+  {skills.map((skill) => (
+    <div class="skill">
+      <h3>{skill.nombre}</h3>
+      
+      <!-- Barra de nivel -->
+      <div class="nivel-container">
+        <div 
+          class="nivel-barra"
+          style={`width: ${skill.nivel}%;`}
+        ></div>
+      </div>
+      <img src={skill.imagen} alt={skill.nombre} />
+    </div>
+  ))}
+</div>
+
+<style>
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .skill {
+    border: solid 5px #000;
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
+    min-width: 400px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    text-align: center;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* Efecto al pasar el ratón sobre la tarjeta */
+  .skill:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    z-index: 1;
+  }
+
+  .skill img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  /* Efecto al pasar el ratón sobre la imagen */
+  .skill img:hover {
+    transform: rotate(3deg);
+  }
+
+  /* Contenedor de la barra de nivel */
+  .nivel-container {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  /* Barra de nivel dinámica */
+  .nivel-barra {
+    height: 100%;
+    background-color: var(--color-principal, #cddc39);
+    transition: width 0.5s ease-in-out;
+  }
+</style>
