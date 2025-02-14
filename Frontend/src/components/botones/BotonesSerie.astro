@@ -35,12 +35,13 @@ const { botones }: Props = Astro.props;
   p {
     display: block;
     flex: 1;
+    background: none;
   }
   img {
     height: 20px;
     align-self: center;
     display: block;
-    filter: invert(0%) sepia(100%) saturate(500%) hue-rotate(200deg); /* Ajusta el color inicial */
+    background: none;
   }
   .botones-link {
     display: flex;
@@ -49,7 +50,6 @@ const { botones }: Props = Astro.props;
   }
 
   .botones-link button {
-    background-color: var(--color-principal);
     width: 100%;
     border: none;
     border-right: solid 5px #000;
@@ -58,14 +58,12 @@ const { botones }: Props = Astro.props;
   .botones-link button:last-child() {
     border-right: none;
   }
-  .botones-link button:hover() {
-    background-color: #000;
+  img:hover() {
+    background: none;
   }
 
-  .botones-link button a:hover() {
-    color: #fff;
-  }
-  .botones-link button:hover() img {
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg); /* Cambia al color deseado */
+  .botones-link :hover() {
+    transition: 0.2s;
+    background-color: var(--color-principal);
   }
 </style>
