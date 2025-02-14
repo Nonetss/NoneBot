@@ -1,0 +1,72 @@
+---
+import Skills from "@components/tarjetas/Skills.astro";
+
+const skill = [
+  {
+    nombre: "JavaScript",
+    nivel: 85,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+  },
+  {
+    nombre: "TypeScript",
+    nivel: 80,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg",
+  },
+  {
+    nombre: "React",
+    nivel: 90,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+  },
+  {
+    nombre: "Astro",
+    nivel: 75,
+    imagen: "https://astro.build/assets/press/astro-logo-light.svg",
+  },
+  {
+    nombre: "Python",
+    nivel: 95,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg",
+  },
+  {
+    nombre: "Django",
+    nivel: 80,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/7/75/Django_logo.svg",
+  },
+  {
+    nombre: "Rust",
+    nivel: 70,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg",
+  },
+  {
+    nombre: "Go",
+    nivel: 75,
+    imagen:
+      "https://upload.wikimedia.org/wikipedia/commons/0/05/Go_Logo_Blue.svg",
+  },
+];
+---
+
+<section>
+  <nav>
+    <h1>Skill-set</h1>
+    <Skills skills={skill} />
+  </nav>
+</section>
+
+<style>
+  section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  nav {
+    width: 80%;
+  }
+</style>
