@@ -24,14 +24,14 @@ const proyectos = [
     enlaceProyecto: "",
   },
   {
-    nombre: "Proyecto 2",
+    nombre: "Proyecto 4",
     imgEnlace: "/images/proyecto2.jpg",
     titulo: "Título del Proyecto 2",
     descripcion: "Descripción breve del proyecto 2.",
     enlaceProyecto: "",
   },
   {
-    nombre: "Proyecto 3",
+    nombre: "Proyecto 5",
     imgEnlace: "/images/proyecto2.jpg",
     titulo: "Título del Proyecto 2",
     descripcion: "Descripción breve del proyecto 2.",
@@ -42,7 +42,7 @@ const proyectos = [
 
 <section>
   <div class="proyectos-div">
-    <h1>Proyectos</h1>
+    <h1 id="proyectos">Proyectos</h1>
     <div class="lista-proyectos">
       <Project proyectos={proyectos} />
     </div>
@@ -54,7 +54,6 @@ const proyectos = [
   section {
     margin-top: 100px;
     border-top: solid 5px #000;
-    padding-bottom: 200px;
     width: 100%;
     display: flex;
     justify-content: center;
