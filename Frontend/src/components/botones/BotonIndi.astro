@@ -13,7 +13,6 @@ const { enlace, texto }: Props = Astro.props;
 
 <style>
   button {
-    background-color: var(--color-principal);
     border: solid 5px #000;
   }
   a {
@@ -23,10 +22,7 @@ const { enlace, texto }: Props = Astro.props;
     display: block;
   }
   button:hover() {
-    background-color: #000;
-  }
-
-  button a:hover() {
-    color: #fff;
+    transition: 0.2s;
+    background-color: var(--color-principal);
   }
 </style>
