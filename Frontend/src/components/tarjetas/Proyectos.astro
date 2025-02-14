@@ -15,81 +15,295 @@ const { proyectos }: Props = Astro.props;
 import BotonIndi from "@components/botones/BotonIndi.astro";
 ---
 
-<nav class="scroller">
-  {
-    proyectos.map((proyecto) => (
-      <div class="proyecto">
-        <div class="proyecto-nombre">
-          <p>{proyecto.nombre}</p>
+<!-- Estructura del carrusel con clones -->
+<div class="carousel-container">
+  <!-- Botón "anterior" -->
+  <button class="btn-prev" aria-label="Anterior">&#10094;</button>
+
+  <!-- Contenedor de proyectos (con clones al inicio y al final) -->
+  <nav class="scroller">
+    {
+      /*
+      Clonamos los dos últimos proyectos para que aparezcan a la izquierda (slice(-2)).
+    */
+    }
+    {
+      proyectos.slice(-2).map((proyecto) => (
+        <div class="proyecto clone">
+          <div class="proyecto-nombre">
+            <p>{proyecto.nombre}</p>
+          </div>
+          <div class="proyecto-imagen">
+            <img
+              src={proyecto.imgEnlace}
+              alt={`Imagen de ${proyecto.nombre}`}
+            />
+          </div>
+          <div class="proyecto-detalles">
+            <h3>{proyecto.titulo}</h3>
+            <p>{proyecto.descripcion}</p>
+            <BotonIndi
+              texto="Ver el proyecto"
+              enlace={proyecto.enlaceProyecto}
+            />
+          </div>
         </div>
-        <div class="proyecto-imagen">
-          <img src={proyecto.imgEnlace} alt={`Imagen de ${proyecto.nombre}`} />
+      ))
+    }
+
+    {
+      /*
+      Los proyectos originales
+    */
+    }
+    {
+      proyectos.map((proyecto) => (
+        <div class="proyecto">
+          <div class="proyecto-nombre">
+            <p>{proyecto.nombre}</p>
+          </div>
+          <div class="proyecto-imagen">
+            <img
+              src={proyecto.imgEnlace}
+              alt={`Imagen de ${proyecto.nombre}`}
+            />
+          </div>
+          <div class="proyecto-detalles">
+            <h3>{proyecto.titulo}</h3>
+            <p>{proyecto.descripcion}</p>
+            <BotonIndi
+              texto="Ver el proyecto"
+              enlace={proyecto.enlaceProyecto}
+            />
+          </div>
         </div>
-        <div class="proyecto-detalles">
-          <h3>{proyecto.titulo}</h3>
-          <p>{proyecto.descripcion}</p>
-          <BotonIndi texto="Ver el proyecto" enlace={proyecto.enlaceProyecto} />
+      ))
+    }
+
+    {
+      /*
+      Clonamos los dos primeros proyectos para que aparezcan a la derecha (slice(0,2)).
+    */
+    }
+    {
+      proyectos.slice(0, 2).map((proyecto) => (
+        <div class="proyecto clone">
+          <div class="proyecto-nombre">
+            <p>{proyecto.nombre}</p>
+          </div>
+          <div class="proyecto-imagen">
+            <img
+              src={proyecto.imgEnlace}
+              alt={`Imagen de ${proyecto.nombre}`}
+            />
+          </div>
+          <div class="proyecto-detalles">
+            <h3>{proyecto.titulo}</h3>
+            <p>{proyecto.descripcion}</p>
+            <BotonIndi
+              texto="Ver el proyecto"
+              enlace={proyecto.enlaceProyecto}
+            />
+          </div>
         </div>
-      </div>
-    ))
+      ))
+    }
+  </nav>
+
+  <!-- Botón "siguiente" -->
+  <button class="btn-next" aria-label="Siguiente">&#10095;</button>
+</div>
+
+<!-- Script para la navegación y ajuste en el carrusel infinito -->
+<script>
+  // Asegurarse de ejecutar solo en el navegador
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+      const slides = document.querySelectorAll(".proyecto");
+      const totalSlides = slides.length;
+      // Tenemos 2 clones al inicio y 2 al final
+      const clonesBefore = 2;
+      const clonesAfter = 2;
+      // Número de proyectos originales
+      const originalCount = totalSlides - clonesBefore - clonesAfter;
+      // El primer proyecto original en el DOM está en 'clonesBefore'
+      let currentIndex = clonesBefore;
+
+      // Función para navegar a una diapositiva dada (por índice en el DOM)
+      function goToSlide(index) {
+        currentIndex = index;
+        // Centrar la diapositiva tanto horizontal como verticalmente
+        slides[currentIndex].scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
+        });
+        // Después de la animación, reajustamos si se está en los clones
+        setTimeout(adjustIfClone, 600);
+      }
+
+      // Función para reajustar la posición si estamos en los clones
+      function adjustIfClone() {
+        // Si estamos en la zona de clones al inicio:
+        if (currentIndex < clonesBefore) {
+          currentIndex += originalCount;
+          slides[currentIndex].scrollIntoView({
+            behavior: "auto",
+            block: "center",
+            inline: "center",
+          });
+        }
+        // Si estamos en la zona de clones al final:
+        if (currentIndex >= clonesBefore + originalCount) {
+          currentIndex -= originalCount;
+          slides[currentIndex].scrollIntoView({
+            behavior: "auto",
+            block: "center",
+            inline: "center",
+          });
+        }
+      }
+
+      // Botones de navegación
+      const btnPrev = document.querySelector(".btn-prev");
+      const btnNext = document.querySelector(".btn-next");
+
+      btnPrev.addEventListener("click", () => {
+        goToSlide(currentIndex - 1);
+      });
+
+      btnNext.addEventListener("click", () => {
+        goToSlide(currentIndex + 1);
+      });
+
+      // Posición inicial: centramos el primer proyecto original
+      slides[currentIndex].scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "center",
+      });
+    });
   }
-</nav>
+</script>
 
 <style>
-  /* 🔹 Contenedor con scroll */
-  .scroller {
-    display: flex;
+  /* Asegura que la página ocupe todo el alto, para centrar verticalmente */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  /* Contenedor general del carrusel */
+  .carousel-container {
+    /* Ocupa todo el alto disponible */
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 100px;
-    padding: 16px 0px;
-
-    /* 🛠 Habilitar scroll snapping */
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
-  .scroller > .proyecto {
-    scroll-snap-align: center;
-    justify-content: center;
+    height: 100%;
+    /* Para centrar vertical/horizontal dentro de la ventana */
+    display: flex;
     align-items: center;
-    border: 5px solid #000;
-    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
-    width: 600px;
-    flex-shrink: 0;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
   }
-
-  .proyecto:first-child() {
-    margin-left: calc(50% - 300px);
-  }
-  .proyecto:last-child() {
-    margin-right: calc(50% - 300px);
-  }
-
-  /* Ocultar scrollbar en Chrome, Edge y Safari */
-  .scroller::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 🔹 Cada tarjeta de proyecto se anclará en el scroll */
   p {
     background: none;
   }
 
+  /* Botones de navegación (flechas) */
+  .btn-prev,
+  .btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #000;
+    cursor: pointer;
+    z-index: 1;
+    height: 100%;
+    padding: 20px;
+  }
+
+  .btn-prev {
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      var(--color-bg, #fff),
+      80%,
+      rgba(0, 0, 0, 0)
+    );
+  }
+  .btn-next {
+    right: 0;
+    background: linear-gradient(
+      -90deg,
+      var(--color-bg, #fff),
+      80%,
+      rgba(0, 0, 0, 0)
+    );
+  }
+
+  /* Contenedor con scroll horizontal */
+  .scroller {
+    display: flex;
+    width: 100%;
+    /* Algo de altura fija para que se vea en el centro vertical */
+    height: 70%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 100px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    box-sizing: border-box;
+  }
+  /* Ocultar scrollbar en navegadores basados en WebKit */
+  .scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cada tarjeta de proyecto */
+  .proyecto {
+    flex-shrink: 0;
+    width: 600px;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid #000;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+    background-color: #2c3e50;
+    box-sizing: border-box;
+  }
+
   .proyecto-nombre {
+    width: 100%;
     text-align: center;
-    background-color: var(--color-principal);
-    padding: 5px 0px;
-    border-bottom: solid 5px #000;
+    background-color: var(--color-principal, #cddc39);
+    padding: 5px 0;
+    border-bottom: 5px solid #000;
   }
 
   .proyecto-imagen {
-    border-bottom: solid 5px #000;
+    width: 100%;
+    border-bottom: 5px solid #000;
+  }
+
+  .proyecto-imagen img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .proyecto-detalles {
-    padding: 20px;
+    width: 90%;
+    margin: 5px;
     background-color: #2c3e50;
+  }
+
+  p {
+    margin: 0.5rem 0;
   }
 </style>
