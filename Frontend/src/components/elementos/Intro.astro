@@ -16,41 +16,61 @@ const botones = [
 <section class="contenedor-global">
   <nav class="contenedor-contenido">
     <div class="contenedor-intro">
-      <div>
+      <div class="presentacion">
         <div class="contenedor-saludo">
-          <h1>Hola!</h1>
-          <h1>Soy Antonio</h1>
-          <p>Texto</p>
+          <h1 class="titulo-principal">¡Hola! Soy <span>Antonio</span></h1>
+          <p class="descripcion">
+            Físico de formación y programador por pasión. Mi experiencia en
+            ciencia me permite transformar soluciones complejas en herramientas
+            digitales útiles.
+          </p>
         </div>
-        <div>
-          <a href={PDF} target="_blank" rel="noopener noreferrer">
-            <Image class={"link"} src={CV} height={50} alt="Logo del cv" />
+
+        <div class="contenedor-enlaces">
+          <a href={PDF} target="_blank" class="enlace-cv">
+            <Image src={CV} height={50} alt="CV" class="icono" />
+            <span>Descargar CV</span>
           </a>
-          <a
-            href="https://github.com/Nonetss"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={GitHub} height={50} alt="Logo de github" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/amorenolopezbarajas/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={Linkeding} height={50} alt="Logo de linkedin" />
-          </a>
+          <div class="redes-sociales">
+            <a
+              href="https://github.com/Nonetss"
+              target="_blank"
+              class="social-link"
+            >
+              <Image
+                src={GitHub}
+                height={40}
+                alt="GitHub"
+                class="icono-social"
+              />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/amorenolopezbarajas/"
+              target="_blank"
+              class="social-link"
+            >
+              <Image
+                src={Linkeding}
+                height={40}
+                alt="LinkedIn"
+                class="icono-social"
+              />
+            </a>
+          </div>
         </div>
       </div>
-      <Image
-        src={Avatar}
-        height={200}
-        alt="A bird sitting on a nest of eggs."
-        class={"avatar"}
-      />
+
+      <div class="contenedor-avatar">
+        <Image
+          src={Avatar}
+          height={350}
+          alt="Avatar profesional"
+          class="avatar"
+        />
+      </div>
     </div>
-    <nav class="contenedor-link">
-      <h3>Enlace rápido:</h3>
+
+    <nav class="navegacion-rapida">
       <BotonSerie botones={botones} />
     </nav>
   </nav>
@@ -58,65 +78,141 @@ const botones = [
 
 <style>
   .contenedor-global {
-    width: 100%;
+    background: linear-gradient(
+      135deg,
+      $color-fondo 0%,
+      $color-secundario 100%
+    );
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-  }
-  .contenedor-contenido {
-    width: 80%;
-  }
-  .contenedor-intro {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 200px 0px;
-  }
-  .contenedor-saludo {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1000px;
-  }
-  .contenedor-intro h1 {
-    margin: 0;
-    padding: 0;
-    line-height: 1.2;
+    padding: 2rem 0;
   }
 
-  div {
-    width: 50%;
+  .contenedor-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
-  .contenedor-link {
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+
+  .contenedor-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
     align-items: center;
-    position: absolute;
+    margin-bottom: 4rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
   }
-  .contenedor-link h3 {
-    text-align: left;
-    align-self: flex-start;
+
+  .titulo-principal {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: $color-primario;
+
+    span {
+      color: $color-acento;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 12px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: currentColor;
+      }
+    }
   }
-  .avatar {
-    border: 3px solid #000;
+
+  .descripcion {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: $color-texto;
+    max-width: 80%;
+    margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+  }
+
+  .contenedor-enlaces {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .enlace-cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.5rem;
+    background: $color-acento;
+    color: white;
+    border-radius: 50px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  .redes-sociales {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .social-link {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+
+  .contenedor-avatar {
+    position: relative;
+    .avatar {
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+
+  .navegacion-rapida {
+    margin-top: 3rem;
+    text-align: center;
+
+    h3 {
+      font-size: 1.1rem;
+      color: $color-texto-secundario;
+      margin-bottom: 1rem;
+    }
   }
 </style>
 
 <script>
-  // Script para hacer scroll suave en los enlaces de navegación
-  document.querySelectorAll(".contenedor-link a").forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      e.preventDefault(); // Previene la acción por defecto de los enlaces
-      const targetId = e.target.getAttribute("href").substring(1); // Obtiene el id del target
-      const targetElement = document.getElementById(targetId); // Busca el elemento destino
-
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth", // Activamos el scroll suave
+  // Scroll suave mejorado
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
           block: "start",
         });
+
+        // Actualizar URL
+        history.pushState(null, null, `#${target.id}`);
       }
     });
   });
