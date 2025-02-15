@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import Avatar from "@img/avatar.png";
-import BotonIndi from "@components/botones/BotonIndi.astro";
+import GitHub from "@img/github.svg";
+import Linkeding from "@img/linkedin.svg";
+import CV from "@img/cv.png";
 import BotonSerie from "@components/botones/BotonesSerie.astro";
 const botones = [
   { texto: "Proyectos", enlace: "/#proyectos" },
@@ -19,7 +21,17 @@ const botones = [
           <h1>Soy Antonio</h1>
           <p>Texto</p>
         </div>
-        <BotonIndi texto="Hola" enlace="" />
+        <div>
+          <a href="/src/assets/cv.pdf">
+            <Image class={"link"} src={CV} height={50} alt="Logo del cv" />
+          </a>
+          <a href="https://github.com/Nonetss">
+            <Image src={GitHub} height={50} alt="Logo de github" />
+          </a>
+          <a href="https://www.linkedin.com/in/amorenolopezbarajas/">
+            <Image src={Linkeding} height={50} alt="Logo de github" />
+          </a>
+        </div>
       </div>
       <Image
         src={Avatar}
