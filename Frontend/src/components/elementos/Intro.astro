@@ -7,9 +7,9 @@ import CV from "@img/cv.png";
 import PDF from "@img/cv.pdf";
 import BotonSerie from "@components/botones/BotonesSerie.astro";
 const botones = [
-  { texto: "Proyectos", enlace: "/#proyectos" },
-  { texto: "Skill-set", enlace: "/#skill" },
-  { texto: "Contacto", enlace: "/#contacto" },
+  { texto: "Proyectos", enlace: "#proyectos" },
+  { texto: "Skill-set", enlace: "#skill" },
+  { texto: "Contacto", enlace: "#contacto" },
 ];
 ---
 
@@ -23,14 +23,22 @@ const botones = [
           <p>Texto</p>
         </div>
         <div>
-          <a href={PDF}>
+          <a href={PDF} target="_blank" rel="noopener noreferrer">
             <Image class={"link"} src={CV} height={50} alt="Logo del cv" />
           </a>
-          <a href="https://github.com/Nonetss">
+          <a
+            href="https://github.com/Nonetss"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image src={GitHub} height={50} alt="Logo de github" />
           </a>
-          <a href="https://www.linkedin.com/in/amorenolopezbarajas/">
-            <Image src={Linkeding} height={50} alt="Logo de github" />
+          <a
+            href="https://www.linkedin.com/in/amorenolopezbarajas/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={Linkeding} height={50} alt="Logo de linkedin" />
           </a>
         </div>
       </div>
@@ -42,7 +50,7 @@ const botones = [
       />
     </div>
     <nav class="contenedor-link">
-      <h3>Enlace rapido:</h3>
+      <h3>Enlace rápido:</h3>
       <BotonSerie botones={botones} />
     </nav>
   </nav>
@@ -71,9 +79,9 @@ const botones = [
     max-width: 1000px;
   }
   .contenedor-intro h1 {
-    margin: 0; /* Elimina los márgenes entre los <h1> */
-    padding: 0; /* Asegura que no haya relleno */
-    line-height: 1.2; /* Ajusta la altura de línea para controlar el espacio vertical */
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
   }
 
   div {
@@ -95,3 +103,21 @@ const botones = [
     border: 3px solid #000;
   }
 </style>
+
+<script>
+  // Script para hacer scroll suave en los enlaces de navegación
+  document.querySelectorAll(".contenedor-link a").forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault(); // Previene la acción por defecto de los enlaces
+      const targetId = e.target.getAttribute("href").substring(1); // Obtiene el id del target
+      const targetElement = document.getElementById(targetId); // Busca el elemento destino
+
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth", // Activamos el scroll suave
+          block: "start",
+        });
+      }
+    });
+  });
+</script>
