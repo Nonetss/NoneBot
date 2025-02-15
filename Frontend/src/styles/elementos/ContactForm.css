@@ -1,0 +1,57 @@
+/* Ajusta los estilos a tu gusto o ruta del archivo */
+#contacto {
+  padding: 50px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#contacto nav {
+  border: solid 5px #000;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px 40px 20px 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.contact-form label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: solid 5px #000;
+  resize: none; /* Evita que el usuario cambie el tamaño del textarea */
+  overflow: hidden; /* Oculta la barra de desplazamiento */
+}
+
+.contact-form button {
+  margin: 15px 0px 0px 20px;
+  padding: 10px;
+  background: var(
+    --color-principal,
+    #007bff
+  ); /* Puedes ajustar tu color principal */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.contact-form button:hover {
+  background: #0056b3;
+}
