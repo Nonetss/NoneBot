@@ -1,5 +1,5 @@
 ---
-import Project from "@components/tarjetas/Proyectos.astro";
+import Carrusel from "@components/tarjetas/CarouselProyectos.jsx";
 
 const proyectos = [
   {
@@ -44,7 +44,7 @@ const proyectos = [
   <div class="proyectos-div">
     <h1 id="proyectos">Proyectos</h1>
     <div class="lista-proyectos">
-      <Project proyectos={proyectos} />
+      <Carrusel proyectos={proyectos} client:load />
     </div>
   </div>
 </section>
