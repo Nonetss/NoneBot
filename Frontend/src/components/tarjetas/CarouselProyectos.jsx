@@ -35,7 +35,7 @@ export default function CarouselProyectos({ proyectos }) {
   useEffect(() => {
     if (!initialized && slides.length > 0 && slides[currentIndex]) {
       scrollerRef.current.scrollTo({
-        left: slides[1].offsetLeft,
+        left: slides[2].offsetLeft,
         behavior: "auto",
       });
       setInitialized(true);
@@ -143,13 +143,15 @@ export default function CarouselProyectos({ proyectos }) {
               </div>
               <div className="proyectoDetalles">
                 <h3>{proyecto.titulo}</h3>
-                <p>{proyecto.descripcion}</p>
-                <a
-                  href={proyecto.enlaceProyecto || "#"}
-                  className="verProyecto"
-                >
-                  Ver el proyecto
-                </a>
+                <div className="proyectosInfo">
+                  <p className="proyectoDescripcion">{proyecto.descripcion}</p>
+                  <a
+                    href={proyecto.enlaceProyecto || "#"}
+                    className="verProyecto"
+                  >
+                    Ver el proyecto
+                  </a>
+                </div>
               </div>
             </div>
           );

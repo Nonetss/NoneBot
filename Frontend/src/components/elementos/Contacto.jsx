@@ -38,21 +38,23 @@ export default function ContactForm() {
 
   return (
     <section id="contacto">
-      <h1>Contacto:</h1>
-      <nav>
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <label htmlFor="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required />
+      <div className="contacto-div">
+        <h1>Contacto:</h1>
+        <nav>
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <label htmlFor="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required />
 
-          <label htmlFor="email">Correo Electrónico:</label>
-          <input type="email" id="email" name="email" required />
+            <label htmlFor="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required />
 
-          <label htmlFor="mensaje">Mensaje:</label>
-          <textarea id="mensaje" name="mensaje" rows="4" required />
+            <label htmlFor="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required />
 
-          <button type="submit">Enviar</button>
-        </form>
-      </nav>
+            <button type="submit">Enviar</button>
+          </form>
+        </nav>
+      </div>
     </section>
   );
 }

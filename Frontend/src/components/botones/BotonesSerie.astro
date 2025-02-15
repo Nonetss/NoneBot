@@ -11,12 +11,13 @@ interface Props {
 const { botones }: Props = Astro.props;
 ---
 
+<span></span>
 <div class="botones-link">
   {
     botones.map((boton) => (
       <button>
         <a href={boton.enlace}>
-          <p>{boton.texto}</p>
+          {boton.texto}
           <img src="/assets/link-arrow.svg" alt="" />
         </a>
       </button>
@@ -31,11 +32,8 @@ const { botones }: Props = Astro.props;
     padding: 0 10px;
     width: 100%;
     padding: 10px 20px;
-  }
-  p {
-    display: block;
-    flex: 1;
-    background: none;
+    text-decoration: none; /* Para quitar el subrayado si es necesario */
+    justify-content: space-between;
   }
   img {
     height: 20px;
@@ -47,22 +45,32 @@ const { botones }: Props = Astro.props;
     display: flex;
     width: 100%;
     border: solid 5px #000;
+    position: relative;
+  }
+
+  span {
+    position: absolute;
+    width: 100%; /* Ocupa solo el ancho del contenedor */
+    height: 5px;
+    background: #000;
+    transform: translate(-50%, 30px); /* Centra y rota */
+    z-index: 0; /* Asegúrate de que esté detrás de los botones */
+    pointer-events: none;
   }
 
   .botones-link button {
     width: 100%;
+    z-index: 1;
     border: none;
+    position: relative;
     border-right: solid 5px #000;
     display: flex;
   }
-  .botones-link button:last-child() {
+  .botones-link button:last-child {
     border-right: none;
   }
-  img:hover() {
-    background: none;
-  }
 
-  .botones-link :hover() {
+  .botones-link :hover {
     transition: 0.2s;
     background-color: var(--color-principal);
   }
