@@ -35,7 +35,7 @@ export default function CarouselProyectos({ proyectos }) {
   useEffect(() => {
     if (!initialized && slides.length > 0 && slides[currentIndex]) {
       scrollerRef.current.scrollTo({
-        left: slides[currentIndex].offsetLeft,
+        left: slides[1].offsetLeft,
         behavior: "auto",
       });
       setInitialized(true);
