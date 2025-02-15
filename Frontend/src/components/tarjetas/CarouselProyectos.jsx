@@ -155,6 +155,7 @@ export default function CarouselProyectos({ proyectos }) {
                   <p className="proyectoDescripcion">{proyecto.descripcion}</p>
                   <a
                     href={proyecto.enlaceProyecto || "#"}
+                    target="_blank"
                     className="verProyecto"
                   >
                     Ver el proyecto
