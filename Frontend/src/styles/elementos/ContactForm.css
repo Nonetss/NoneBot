@@ -1,8 +1,12 @@
 /* Ajusta los estilos a tu gusto o ruta del archivo */
 #contacto {
-  padding: 50px;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
+  margin: 100px 0;
+  padding-top: 100px;
+  border-top: 5px solid #000;
+  justify-content: center;
+  display: flex;
 }
 
 #contacto nav {
@@ -11,6 +15,10 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 20px 40px 20px 20px;
+}
+
+.contacto-div {
+  width: 80%;
 }
 
 .contact-form {
