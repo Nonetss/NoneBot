@@ -12,7 +12,7 @@ interface Props {
 const { skills }: Props = Astro.props;
 ---
 
-<div class="skills" id="skill">
+<div class="skills" >
   {skills.map((skill) => (
     <div class="skill">
       <h3>{skill.nombre}</h3>
