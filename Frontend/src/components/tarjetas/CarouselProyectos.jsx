@@ -18,8 +18,21 @@ export default function CarouselProyectos({ proyectos }) {
   // Empezamos en clonesBefore para que "currentIndex" señale al primer proyecto real
   const [currentIndex, setCurrentIndex] = useState(clonesBefore);
 
-  // Guardamos un timeout para poder "debouncear" el ajuste de clones si hacen clic varias veces
+  // Estado para detectar si estamos en móvil
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Referencia para manejar el timeout y evitar superposiciones
   const adjustTimeoutRef = useRef(null);
+  // Referencias para detectar el swipe
+  const touchStartRef = useRef(null);
+  const touchEndRef = useRef(null);
+
+  // Detectamos si estamos en móvil (por ejemplo, ancho menor o igual a 768px)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth <= 768);
+    }
+  }, []);
 
   // Al montar, recogemos los nodos de clase .proyecto
   useEffect(() => {
@@ -31,11 +44,11 @@ export default function CarouselProyectos({ proyectos }) {
     }
   }, [proyectos]);
 
-  // Situamos el scroll inicial en el proyecto real (sin animación) solo la primera vez
+  // Posicionamos el scroll en el primer proyecto real sin animación
   useEffect(() => {
     if (!initialized && slides.length > 0 && slides[currentIndex]) {
       scrollerRef.current.scrollTo({
-        left: slides[2].offsetLeft,
+        left: slides[currentIndex].offsetLeft,
         behavior: "auto",
       });
       setInitialized(true);
@@ -54,16 +67,17 @@ export default function CarouselProyectos({ proyectos }) {
       });
     }
 
-    // Cancelamos cualquier timeout previo, para evitar superposiciones
+    // Cancelamos cualquier timeout previo para evitar superposiciones
     if (adjustTimeoutRef.current) {
       clearTimeout(adjustTimeoutRef.current);
     }
 
-    // Iniciamos un nuevo timeout (debounce). Ajustaremos clones pasado un pequeño lapso.
+    // En móvil, el ajuste se hace de forma inmediata (delay = 0), para evitar el salto hacia atrás.
+    const delay = isMobile ? 0 : 400;
     adjustTimeoutRef.current = setTimeout(() => {
       adjustTimeoutRef.current = null;
       adjustIfClone();
-    }, 400); // Ajusta este tiempo según tu preferencia
+    }, delay);
   };
 
   // Ajusta el índice si caemos en un clon (sin animación visible)
@@ -106,7 +120,7 @@ export default function CarouselProyectos({ proyectos }) {
     });
   };
 
-  // Limpiamos el timeout si el componente se desmonta, para evitar warnings
+  // Limpieza del timeout al desmontar el componente
   useEffect(() => {
     return () => {
       if (adjustTimeoutRef.current) {
@@ -115,20 +129,51 @@ export default function CarouselProyectos({ proyectos }) {
     };
   }, []);
 
+  // Handlers para detección de swipe (touch)
+  const handleTouchStart = (e) => {
+    touchStartRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartRef.current && touchEndRef.current) {
+      const diff = touchStartRef.current - touchEndRef.current;
+      if (Math.abs(diff) > 50) {
+        // Swipe hacia la izquierda: avanzar
+        if (diff > 0) {
+          handleNext();
+        } else {
+          handlePrev();
+        }
+      }
+    }
+    touchStartRef.current = null;
+    touchEndRef.current = null;
+  };
+
   const handlePrev = () => goToSlide(currentIndex - 1);
   const handleNext = () => goToSlide(currentIndex + 1);
 
   return (
     <div className="carouselContainer">
+      {/* Los botones se ocultan en móvil vía CSS */}
       <button className="btnPrev" onClick={handlePrev} aria-label="Anterior">
         &#10094;
       </button>
 
-      <div ref={scrollerRef} className="scroller">
+      <div
+        ref={scrollerRef}
+        className="scroller"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {fullProyectos.map((proyecto, idx) => {
           const isClone =
             idx < clonesBefore || idx >= clonesBefore + originalCount;
-
           return (
             <div className={`proyecto${isClone ? " clone" : ""}`} key={idx}>
               <div className="proyectoNombre">
