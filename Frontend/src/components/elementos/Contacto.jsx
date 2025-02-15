@@ -39,7 +39,7 @@ export default function ContactForm() {
   return (
     <section id="contacto">
       <div className="contacto-div">
-        <h1>Contacto:</h1>
+        <h1>Contacto</h1>
         <nav>
           <form className="contact-form" onSubmit={handleSubmit}>
             <label htmlFor="nombre">Nombre:</label>
@@ -53,6 +53,17 @@ export default function ContactForm() {
 
             <button type="submit">Enviar</button>
           </form>
+
+          {/* 📩 Enlace de contacto directo */}
+          <div className="direct-contact">
+            <p>También puedes enviarme un correo directamente:</p>
+            <a
+              href="mailto:contacto@amorenolopezbarajas.es"
+              className="email-link"
+            >
+              contacto@amorenolopezbarajas.es
+            </a>
+          </div>
         </nav>
       </div>
     </section>

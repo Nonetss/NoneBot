@@ -1,0 +1,96 @@
+<footer class="footer">
+  <div <p class='="footer-content"'>
+    <p class="footer-subtext">
+      © {new Date().getFullYear()} Antonio Moreno López Barajas.
+    </p>
+
+    <div class="footer-links">
+      <a href="mailto:contacto@amorenolopezbarajas.es" class="footer-link">
+        📬 Contacto
+      </a>
+      <span></span>
+      <a
+        href="https://github.com/tuusuario"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-link"
+      >
+        🖱️ GitHub
+      </a>
+      <span></span>
+      <a
+        href="https://www.linkedin.com/in/tuusuario"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-link"
+      >
+        💼 LinkedIn
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 1rem;
+    position: relative;
+    bottom: 0;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  }
+  span {
+    color: white;
+    background-color: white;
+    width: 2px;
+  }
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .footer-text {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+
+  .footer-subtext {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  @keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .footer-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-link {
+    text-decoration: none;
+    font-size: 1rem;
+    transition:
+      color 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--color-principal);
+    transform: translateY(-3px);
+  }
+</style>
