@@ -12,76 +12,188 @@ interface Props {
 const { skills }: Props = Astro.props;
 ---
 
-<div class="skills" >
-  {skills.map((skill) => (
-    <div class="skill">
-      <h3>{skill.nombre}</h3>
-      
-      <!-- Barra de nivel -->
-      <div class="nivel-container">
-        <div 
-          class="nivel-barra"
-          style={`width: ${skill.nivel}%;`}
-        ></div>
+<div class="skills-container">
+  <div class="skills-grid">
+    {skills.map((skill) => (
+      <div class="skill-card">
+        <div class="skill-header">
+          <img 
+            src={skill.imagen} 
+            alt={skill.nombre} 
+            class="skill-icon"
+            loading="lazy"
+          />
+          <h3 class="skill-title">{skill.nombre}</h3>
+        </div>
+        
+        <!-- Barra de nivel mejorada -->
+        <div class="skill-progress">
+          <div class="progress-bar">
+            <div 
+              class="progress-fill"
+              style={`width: ${skill.nivel}%;`}
+              aria-label={`Nivel de ${skill.nombre}: ${skill.nivel}%`}
+            ></div>
+          </div>
+          <span class="progress-text">{skill.nivel}%</span>
+        </div>
       </div>
-      <img src={skill.imagen} alt={skill.nombre} />
-    </div>
-  ))}
+    ))}
+  </div>
 </div>
 
-<style>
-  .skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+<style >
+
+  .skills-container {
+    padding: 2rem 1rem;
+    max-width: 1440px;
+    margin: 0 auto;
   }
 
-  .skill {
-    border: solid 5px #000;
-    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
-    min-width: 400px;
-    margin-bottom: 1rem;
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
     padding: 1rem;
-    text-align: center;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
   }
 
-  /* Efecto al pasar el ratón sobre la tarjeta */
-  .skill:hover {
-    transform: scale(1.05);
-    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
-    z-index: 1;
+  .skill-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s, filter 0.3s, border-color 0.3s;
+    border: 1px solid #e0e6ed;
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    
   }
 
-  .skill img {
-    width: 100px;
-    height: 100px;
+  .skill-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.05);
+    border-color: var(--color-principal);
+  }
+
+  .skill-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-icon {
+    width: 50px;
+    height: 50px;
     object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: rotate(15deg) scale(1.1);
+    }
   }
 
-  /* Efecto al pasar el ratón sobre la imagen */
-  .skill img:hover {
-    transform: rotate(3deg);
+  .skill-title {
+    font-size: 1.25rem;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
   }
 
-  /* Contenedor de la barra de nivel */
-  .nivel-container {
-    width: 100%;
-    height: 10px;
-    background-color: #ddd;
-    border-radius: 5px;
+  .skill-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 10px;
   }
 
-  /* Barra de nivel dinámica */
-  .nivel-barra {
+  .progress-fill {
     height: 100%;
-    background-color: var(--color-principal, #cddc39);
-    transition: width 0.5s ease-in-out;
+    background: linear-gradient(90deg, var(--color-principal), #2b6cb0);
+    border-radius: 4px;
+    transition: width 0.8s ease-in-out;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.3)
+      );
+    }
+  }
+
+  .progress-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    
+    .skill-card {
+      padding: 1rem;
+    }
+    
+    .skill-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .skill-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .skill-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.5rem;
+    }
+    
+    .progress-text {
+      display: none;
+    }
+  }
+
+  /* Animación al cargar */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .skill-card {
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+    
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.1s;
+      }
+    }
   }
 </style>
