@@ -129,6 +129,11 @@ p {
   position: relative;
 }
 
+.verProyecto:hover {
+  transition: 0.5s;
+  background-color: var(--color-secundario);
+}
+
 /* ======================= */
 /*     Responsive CSS      */
 /* ======================= */
