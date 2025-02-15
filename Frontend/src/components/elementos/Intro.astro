@@ -78,14 +78,12 @@ const botones = [
 
 <style>
   .contenedor-global {
-    background: linear-gradient(
-      135deg,
-      $color-fondo 0%,
-      $color-secundario 100%
-    );
     display: flex;
     align-items: center;
-    padding: 2rem 0;
+    padding: 8rem 0;
+    @media (max-width: 768px) {
+      padding: 2rem 0;
+    }
   }
 
   .contenedor-contenido {
@@ -164,6 +162,7 @@ const botones = [
   .redes-sociales {
     display: flex;
     gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .social-link {

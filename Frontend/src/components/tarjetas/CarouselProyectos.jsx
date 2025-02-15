@@ -15,11 +15,11 @@ export default function CarouselProyectos({ proyectos }) {
   const [initialized, setInitialized] = useState(false);
   const originalCount = proyectos.length;
 
-  // Empezamos en clonesBefore para que "currentIndex" señale al primer proyecto real
+  // Comenzamos en clonesBefore para que "currentIndex" señale al primer proyecto real
   const [currentIndex, setCurrentIndex] = useState(clonesBefore);
 
-  // Guardamos un timeout para poder "debouncear" el ajuste de clones si hacen clic varias veces
-  const adjustTimeoutRef = useRef(null);
+  // Referencia para debounce del scroll
+  const scrollTimeoutRef = useRef(null);
 
   // Al montar, recogemos los nodos de clase .proyecto
   useEffect(() => {
@@ -31,21 +31,69 @@ export default function CarouselProyectos({ proyectos }) {
     }
   }, [proyectos]);
 
-  // Situamos el scroll inicial en el proyecto real (sin animación) solo la primera vez
+  // Posicionamos el scroll en el primer proyecto real sin animación
   useEffect(() => {
     if (!initialized && slides.length > 0 && slides[currentIndex]) {
       scrollerRef.current.scrollTo({
-        left: slides[2].offsetLeft,
+        left: slides[currentIndex].offsetLeft,
         behavior: "auto",
       });
       setInitialized(true);
     }
   }, [slides, currentIndex, initialized]);
 
-  // Función para ir a un slide con animación "smooth"
-  const goToSlide = (newIndex) => {
-    setCurrentIndex(newIndex);
+  // Función para ajustar el índice si estamos en un clon
+  const adjustIfClone = (index) => {
+    let newIndex = index;
 
+    if (index < clonesBefore) {
+      newIndex = index + originalCount;
+    } else if (index >= clonesBefore + originalCount) {
+      newIndex = index - originalCount;
+    }
+
+    if (newIndex !== index && slides[newIndex]) {
+      // Ajustamos el scroll de forma inmediata sin animación
+      const originalBehavior = scrollerRef.current.style.scrollBehavior;
+      scrollerRef.current.style.scrollBehavior = "auto";
+      slides[newIndex].scrollIntoView({
+        behavior: "auto",
+        block: "center",
+        inline: "center",
+      });
+      // Forzamos reflow y restauramos el scroll-behavior
+      scrollerRef.current.offsetHeight;
+      scrollerRef.current.style.scrollBehavior = originalBehavior;
+      setCurrentIndex(newIndex);
+    }
+  };
+
+  // onScroll para actualizar el slide activo basándonos en la posición actual
+  const handleScroll = () => {
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    scrollTimeoutRef.current = setTimeout(() => {
+      if (!scrollerRef.current || slides.length === 0) return;
+      const scrollLeft = scrollerRef.current.scrollLeft;
+      let closestIndex = 0;
+      let minDiff = Infinity;
+      slides.forEach((slide, idx) => {
+        const diff = Math.abs(slide.offsetLeft - scrollLeft);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIndex = idx;
+        }
+      });
+      setCurrentIndex(closestIndex);
+      adjustIfClone(closestIndex);
+    }, 100); // Puedes ajustar este debounce si lo consideras necesario
+  };
+
+  // Navegación con botones para escritorio
+  const handlePrev = () => {
+    let newIndex = currentIndex - 1;
+    setCurrentIndex(newIndex);
     if (slides[newIndex]) {
       slides[newIndex].scrollIntoView({
         behavior: "smooth",
@@ -53,82 +101,42 @@ export default function CarouselProyectos({ proyectos }) {
         inline: "center",
       });
     }
+    adjustIfClone(newIndex);
+  };
 
-    // Cancelamos cualquier timeout previo, para evitar superposiciones
-    if (adjustTimeoutRef.current) {
-      clearTimeout(adjustTimeoutRef.current);
+  const handleNext = () => {
+    let newIndex = currentIndex + 1;
+    setCurrentIndex(newIndex);
+    if (slides[newIndex]) {
+      slides[newIndex].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
     }
-
-    // Iniciamos un nuevo timeout (debounce). Ajustaremos clones pasado un pequeño lapso.
-    adjustTimeoutRef.current = setTimeout(() => {
-      adjustTimeoutRef.current = null;
-      adjustIfClone();
-    }, 400); // Ajusta este tiempo según tu preferencia
+    adjustIfClone(newIndex);
   };
 
-  // Ajusta el índice si caemos en un clon (sin animación visible)
-  const adjustIfClone = () => {
-    setCurrentIndex((prevIndex) => {
-      let newIndex = prevIndex;
-
-      // Si el índice está en los clones del inicio, saltamos al final real
-      if (prevIndex < clonesBefore) {
-        newIndex = prevIndex + originalCount;
-      }
-      // Si el índice está más allá del último proyecto real, saltamos al inicio real
-      else if (prevIndex >= clonesBefore + originalCount) {
-        newIndex = prevIndex - originalCount;
-      }
-
-      // Si cambiamos de índice, recolocamos el scroll sin animación
-      if (newIndex !== prevIndex && slides[newIndex]) {
-        if (scrollerRef.current) {
-          const originalBehavior = scrollerRef.current.style.scrollBehavior;
-          scrollerRef.current.style.scrollBehavior = "auto";
-          slides[newIndex].scrollIntoView({
-            behavior: "auto",
-            block: "center",
-            inline: "center",
-          });
-          // Forzamos reflow y restauramos el scroll-behavior
-          scrollerRef.current.offsetHeight;
-          scrollerRef.current.style.scrollBehavior = originalBehavior;
-        } else {
-          slides[newIndex].scrollIntoView({
-            behavior: "auto",
-            block: "center",
-            inline: "center",
-          });
-        }
-      }
-
-      return newIndex;
-    });
-  };
-
-  // Limpiamos el timeout si el componente se desmonta, para evitar warnings
+  // Limpiar el timeout al desmontar el componente
   useEffect(() => {
     return () => {
-      if (adjustTimeoutRef.current) {
-        clearTimeout(adjustTimeoutRef.current);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
     };
   }, []);
 
-  const handlePrev = () => goToSlide(currentIndex - 1);
-  const handleNext = () => goToSlide(currentIndex + 1);
-
   return (
     <div className="carouselContainer">
+      {/* Los botones se ocultan en móvil vía CSS */}
       <button className="btnPrev" onClick={handlePrev} aria-label="Anterior">
         &#10094;
       </button>
 
-      <div ref={scrollerRef} className="scroller">
+      <div ref={scrollerRef} className="scroller" onScroll={handleScroll}>
         {fullProyectos.map((proyecto, idx) => {
           const isClone =
             idx < clonesBefore || idx >= clonesBefore + originalCount;
-
           return (
             <div className={`proyecto${isClone ? " clone" : ""}`} key={idx}>
               <div className="proyectoNombre">
@@ -147,6 +155,7 @@ export default function CarouselProyectos({ proyectos }) {
                   <p className="proyectoDescripcion">{proyecto.descripcion}</p>
                   <a
                     href={proyecto.enlaceProyecto || "#"}
+                    target="_blank"
                     className="verProyecto"
                   >
                     Ver el proyecto

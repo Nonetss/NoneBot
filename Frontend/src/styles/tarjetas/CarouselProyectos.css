@@ -1,9 +1,11 @@
 p {
   background: none;
 }
+
 .proyectoDescripcion {
   padding-bottom: 20px;
 }
+
 .carouselContainer {
   width: 100%;
   height: 100%;
@@ -54,6 +56,7 @@ p {
   scroll-snap-type: x mandatory;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   padding: 20px;
 }
 
@@ -102,6 +105,7 @@ p {
   color: #fff;
   height: 50%;
 }
+
 .proyectosInfo {
   display: flex;
   height: 100%;
@@ -123,4 +127,100 @@ p {
   width: 9rem;
   justify-content: center;
   position: relative;
+}
+
+.verProyecto:hover {
+  transition: 0.5s;
+  background-color: var(--color-secundario);
+}
+
+/* ======================= */
+/*     Responsive CSS      */
+/* ======================= */
+
+@media screen and (max-width: 1024px) {
+  .proyecto {
+    width: 80%;
+  }
+
+  .scroller {
+    gap: 50px;
+    padding: 15px;
+  }
+
+  .btnPrev,
+  .btnNext {
+    font-size: 1.8rem;
+    padding: 15px;
+  }
+
+  .proyectoImagen {
+    height: 18rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .proyecto {
+    width: 90%;
+    border-width: 3px;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  .scroller {
+    gap: 30px;
+    padding: 10px;
+  }
+
+  .btnPrev,
+  .btnNext {
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+
+  .proyectoImagen {
+    height: 15rem;
+  }
+
+  /* Ajuste para el botón verProyecto en pantallas pequeñas */
+  .verProyecto {
+    position: static;
+    display: block;
+    margin: 10px auto 0;
+    width: auto;
+    padding: 0.5rem 1rem;
+    border-width: 2px;
+    font-size: 1.2rem;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .btnPrev,
+  .btnNext {
+    display: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .proyecto {
+    width: 95%;
+    border-width: 2px;
+  }
+
+  .scroller {
+    gap: 20px;
+    padding: 5px;
+  }
+
+  .btnPrev,
+  .btnNext {
+    font-size: 1.2rem;
+    padding: 5px;
+  }
+
+  .proyectoImagen {
+    height: 10rem;
+  }
 }

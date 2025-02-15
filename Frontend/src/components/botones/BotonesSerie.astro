@@ -74,4 +74,55 @@ const { botones }: Props = Astro.props;
     transition: 0.2s;
     background-color: var(--color-principal);
   }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .botones-link {
+      flex-wrap: wrap;
+      border-width: 3px;
+    }
+
+    .botones-link button {
+      width: 50%;
+      border-right: none;
+      border-bottom: solid 3px #000;
+    }
+
+    .botones-link button:nth-child(odd) {
+      border-right: solid 3px #000;
+    }
+
+    .botones-link button:last-child:nth-child(odd) {
+      width: 100%;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    span {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .botones-link {
+      border-width: 2px;
+    }
+
+    .botones-link button {
+      width: 100%;
+      border-right: none !important;
+      border-bottom: solid 2px #000;
+    }
+
+    a {
+      padding: 8px 12px;
+    }
+
+    img {
+      height: 16px;
+    }
+
+    span {
+      display: none;
+    }
+  }
 </style>
