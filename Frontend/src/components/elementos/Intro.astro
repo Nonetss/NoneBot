@@ -4,6 +4,7 @@ import Avatar from "@img/avatar.png";
 import GitHub from "@img/github.svg";
 import Linkeding from "@img/linkedin.svg";
 import CV from "@img/cv.png";
+import PDF from "@img/cv.pdf";
 import BotonSerie from "@components/botones/BotonesSerie.astro";
 const botones = [
   { texto: "Proyectos", enlace: "/#proyectos" },
@@ -22,7 +23,7 @@ const botones = [
           <p>Texto</p>
         </div>
         <div>
-          <a href="/public/cv.pdf">
+          <a href={PDF}>
             <Image class={"link"} src={CV} height={50} alt="Logo del cv" />
           </a>
           <a href="https://github.com/Nonetss">
