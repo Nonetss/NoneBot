@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "@styles/tarjetas/CarouselProyectos.css"; // Tu archivo CSS externo
+import "@styles/tarjetas/CarouselProyectos.css"; // Ajusta la ruta a tu CSS
 
 export default function CarouselProyectos({ proyectos }) {
   const clonesBefore = 2;
@@ -12,13 +12,16 @@ export default function CarouselProyectos({ proyectos }) {
 
   const scrollerRef = useRef(null);
   const [slides, setSlides] = useState([]);
-  const [initialized, setInitialized] = useState(false); // Para evitar re-posicionar cada vez
+  const [initialized, setInitialized] = useState(false);
   const originalCount = proyectos.length;
 
-  // Iniciaremos en clonesBefore (por ejemplo, 2) para apuntar al primer proyecto "real"
+  // Empezamos en clonesBefore para que "currentIndex" señale al primer proyecto real
   const [currentIndex, setCurrentIndex] = useState(clonesBefore);
 
-  // Al montar, obtenemos los nodos .proyecto y los guardamos en "slides"
+  // Guardamos un timeout para poder "debouncear" el ajuste de clones si hacen clic varias veces
+  const adjustTimeoutRef = useRef(null);
+
+  // Al montar, recogemos los nodos de clase .proyecto
   useEffect(() => {
     if (scrollerRef.current) {
       const proyectoElements = Array.from(
@@ -28,7 +31,7 @@ export default function CarouselProyectos({ proyectos }) {
     }
   }, [proyectos]);
 
-  // Una vez que tenemos los "slides", ubicamos el scroll en el proyecto #1 real (sin animación)
+  // Situamos el scroll inicial en el proyecto real (sin animación) solo la primera vez
   useEffect(() => {
     if (!initialized && slides.length > 0 && slides[currentIndex]) {
       scrollerRef.current.scrollTo({
@@ -39,9 +42,10 @@ export default function CarouselProyectos({ proyectos }) {
     }
   }, [slides, currentIndex, initialized]);
 
-  // Función para desplazarnos con animación suave al "newIndex"
+  // Función para ir a un slide con animación "smooth"
   const goToSlide = (newIndex) => {
     setCurrentIndex(newIndex);
+
     if (slides[newIndex]) {
       slides[newIndex].scrollIntoView({
         behavior: "smooth",
@@ -49,24 +53,34 @@ export default function CarouselProyectos({ proyectos }) {
         inline: "center",
       });
     }
-    // Después de 600ms (aprox. duración de animación), ajustamos si es un clon
-    setTimeout(adjustIfClone, 600);
+
+    // Cancelamos cualquier timeout previo, para evitar superposiciones
+    if (adjustTimeoutRef.current) {
+      clearTimeout(adjustTimeoutRef.current);
+    }
+
+    // Iniciamos un nuevo timeout (debounce). Ajustaremos clones pasado un pequeño lapso.
+    adjustTimeoutRef.current = setTimeout(() => {
+      adjustTimeoutRef.current = null;
+      adjustIfClone();
+    }, 400); // Ajusta este tiempo según tu preferencia
   };
 
-  // Ajuste de clones: si “caemos” en uno, saltamos sin animación
+  // Ajusta el índice si caemos en un clon (sin animación visible)
   const adjustIfClone = () => {
     setCurrentIndex((prevIndex) => {
       let newIndex = prevIndex;
-      // Si el índice está en la parte de clonesBefore (p.ej < 2), saltamos al final real
+
+      // Si el índice está en los clones del inicio, saltamos al final real
       if (prevIndex < clonesBefore) {
         newIndex = prevIndex + originalCount;
       }
-      // Si el índice está más allá del último real (>= clonesBefore + originalCount)
+      // Si el índice está más allá del último proyecto real, saltamos al inicio real
       else if (prevIndex >= clonesBefore + originalCount) {
         newIndex = prevIndex - originalCount;
       }
 
-      // Si hay un salto, lo hacemos sin animación
+      // Si cambiamos de índice, recolocamos el scroll sin animación
       if (newIndex !== prevIndex && slides[newIndex]) {
         if (scrollerRef.current) {
           const originalBehavior = scrollerRef.current.style.scrollBehavior;
@@ -76,7 +90,8 @@ export default function CarouselProyectos({ proyectos }) {
             block: "center",
             inline: "center",
           });
-          scrollerRef.current.offsetHeight; // Forzar reflow
+          // Forzamos reflow y restauramos el scroll-behavior
+          scrollerRef.current.offsetHeight;
           scrollerRef.current.style.scrollBehavior = originalBehavior;
         } else {
           slides[newIndex].scrollIntoView({
@@ -86,25 +101,34 @@ export default function CarouselProyectos({ proyectos }) {
           });
         }
       }
+
       return newIndex;
     });
   };
+
+  // Limpiamos el timeout si el componente se desmonta, para evitar warnings
+  useEffect(() => {
+    return () => {
+      if (adjustTimeoutRef.current) {
+        clearTimeout(adjustTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handlePrev = () => goToSlide(currentIndex - 1);
   const handleNext = () => goToSlide(currentIndex + 1);
 
   return (
     <div className="carouselContainer">
-      {/* Botón "anterior" */}
       <button className="btnPrev" onClick={handlePrev} aria-label="Anterior">
         &#10094;
       </button>
 
-      {/* Contenedor que hace scroll horizontal */}
       <div ref={scrollerRef} className="scroller">
         {fullProyectos.map((proyecto, idx) => {
           const isClone =
             idx < clonesBefore || idx >= clonesBefore + originalCount;
+
           return (
             <div className={`proyecto${isClone ? " clone" : ""}`} key={idx}>
               <div className="proyectoNombre">
@@ -132,7 +156,6 @@ export default function CarouselProyectos({ proyectos }) {
         })}
       </div>
 
-      {/* Botón "siguiente" */}
       <button className="btnNext" onClick={handleNext} aria-label="Siguiente">
         &#10095;
       </button>
