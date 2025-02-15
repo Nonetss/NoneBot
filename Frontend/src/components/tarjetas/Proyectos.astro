@@ -116,35 +116,26 @@ import BotonIndi from "@components/botones/BotonIndi.astro";
 
 <!-- Script para la navegación y ajuste en el carrusel infinito -->
 <script>
-  // Asegurarse de ejecutar solo en el navegador
   if (typeof window !== "undefined") {
     document.addEventListener("DOMContentLoaded", () => {
       const slides = document.querySelectorAll(".proyecto");
       const totalSlides = slides.length;
-      // Tenemos 2 clones al inicio y 2 al final
       const clonesBefore = 2;
       const clonesAfter = 2;
-      // Número de proyectos originales
       const originalCount = totalSlides - clonesBefore - clonesAfter;
-      // El primer proyecto original en el DOM está en 'clonesBefore'
-      let currentIndex = clonesBefore;
+      let currentIndex = clonesBefore; // Empieza en el primer proyecto original
 
-      // Función para navegar a una diapositiva dada (por índice en el DOM)
       function goToSlide(index) {
         currentIndex = index;
-        // Centrar la diapositiva tanto horizontal como verticalmente
         slides[currentIndex].scrollIntoView({
           behavior: "smooth",
           block: "center",
           inline: "center",
         });
-        // Después de la animación, reajustamos si se está en los clones
         setTimeout(adjustIfClone, 600);
       }
 
-      // Función para reajustar la posición si estamos en los clones
       function adjustIfClone() {
-        // Si estamos en la zona de clones al inicio:
         if (currentIndex < clonesBefore) {
           currentIndex += originalCount;
           slides[currentIndex].scrollIntoView({
@@ -153,7 +144,6 @@ import BotonIndi from "@components/botones/BotonIndi.astro";
             inline: "center",
           });
         }
-        // Si estamos en la zona de clones al final:
         if (currentIndex >= clonesBefore + originalCount) {
           currentIndex -= originalCount;
           slides[currentIndex].scrollIntoView({
@@ -164,7 +154,6 @@ import BotonIndi from "@components/botones/BotonIndi.astro";
         }
       }
 
-      // Botones de navegación
       const btnPrev = document.querySelector(".btn-prev");
       const btnNext = document.querySelector(".btn-next");
 
@@ -174,13 +163,6 @@ import BotonIndi from "@components/botones/BotonIndi.astro";
 
       btnNext.addEventListener("click", () => {
         goToSlide(currentIndex + 1);
-      });
-
-      // Posición inicial: centramos el primer proyecto original
-      slides[currentIndex].scrollIntoView({
-        behavior: "auto",
-        block: "center",
-        inline: "center",
       });
     });
   }
@@ -289,6 +271,8 @@ import BotonIndi from "@components/botones/BotonIndi.astro";
   .proyecto-imagen {
     width: 100%;
     border-bottom: 5px solid #000;
+    height: 20rem;
+    overflow: hidden;
   }
 
   .proyecto-imagen img {
