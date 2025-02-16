@@ -50,7 +50,7 @@ const ChatComponent = () => {
       setMessages((prev) => [
         ...prev,
         {
-          text: "Error al obtener respuesta.",
+          text: "El servicio esta desactivado por el momento, intentelo mas tarde",
           sender: "bot",
           id: Date.now() + 1,
         },
