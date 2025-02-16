@@ -1,55 +1,63 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./ChatComponent.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm"; // Soporte para listas, tablas, enlaces...
+import "./ChatComponent.css"; // Asegúrate de definir los estilos
+import { askGemini } from "@utils/askGemini";
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [isWaitingForResponse, setIsWaitingForResponse] = useState(false); // Bloquear envío hasta recibir respuesta
+  const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
   const chatBoxRef = useRef(null);
   const lastScrollPosition = useRef(0);
 
-  // Guardar la posición del scroll antes de cerrar el chat
   useEffect(() => {
     if (!isOpen && chatBoxRef.current) {
       lastScrollPosition.current = chatBoxRef.current.scrollTop;
     }
   }, [isOpen]);
 
-  // Restaurar el scroll cuando se reabre el chat
   useEffect(() => {
     if (isOpen && chatBoxRef.current) {
       chatBoxRef.current.scrollTop = lastScrollPosition.current;
     }
   }, [isOpen]);
 
-  // Scroll automático al recibir nuevos mensajes
   useEffect(() => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
   }, [messages]);
 
-  const sendMessage = () => {
-    if (input.trim() === "" || isWaitingForResponse) return; // Bloquea si está esperando respuesta
+  const sendMessage = async () => {
+    if (input.trim() === "" || isWaitingForResponse) return;
 
-    setMessages([...messages, { text: input, sender: "user", id: Date.now() }]);
+    const userMessage = { text: input, sender: "user", id: Date.now() };
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
-    setIsWaitingForResponse(true); // Bloquea hasta recibir respuesta
+    setIsWaitingForResponse(true);
 
-    // Simula una respuesta después de 1 segundo
-    setTimeout(() => {
+    try {
+      const response = await askGemini(userMessage.text);
+      setMessages((prev) => [
+        ...prev,
+        { text: response, sender: "bot", id: Date.now() + 1 },
+      ]);
+    } catch (error) {
+      console.error("Error al obtener respuesta de Gemini:", error);
       setMessages((prev) => [
         ...prev,
         {
-          text: "Esta es una respuesta de prueba.",
+          text: "Error al obtener respuesta.",
           sender: "bot",
           id: Date.now() + 1,
         },
       ]);
-      setIsWaitingForResponse(false); // Desbloquea el envío de mensajes
-    }, 1000);
+    } finally {
+      setIsWaitingForResponse(false);
+    }
   };
 
   return (
@@ -65,7 +73,7 @@ const ChatComponent = () => {
         <img
           src="/src/assets/robot-svgrepo-com.svg"
           alt="Chat icon"
-          className=" h-10 w-10 bg-transparent"
+          className="h-10 w-10 bg-transparent"
         />
       </motion.button>
 
@@ -87,7 +95,12 @@ const ChatComponent = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  {msg.text}
+                  <ReactMarkdown
+                    className="markdown-content"
+                    remarkPlugins={[remarkGfm]}
+                  >
+                    {msg.text}
+                  </ReactMarkdown>
                 </motion.div>
               ))}
             </div>
@@ -104,7 +117,7 @@ const ChatComponent = () => {
                 onClick={sendMessage}
                 whileHover={{ backgroundColor: "var(--color-secundario)" }}
                 whileTap={{ scale: 0.9 }}
-                disabled={isWaitingForResponse} // Deshabilita el botón mientras espera respuesta
+                disabled={isWaitingForResponse}
                 aria-label="Send message"
               >
                 Enviar

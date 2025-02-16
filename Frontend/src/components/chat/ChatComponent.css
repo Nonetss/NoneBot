@@ -89,3 +89,91 @@
 .chat-container.hidden {
   display: none;
 }
+
+.markdown-content {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  color: #ffffff;
+  background: none;
+}
+
+/* Estilo para encabezados */
+.markdown-content h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.markdown-content h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ffaa00;
+}
+
+.markdown-content h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #ff8800;
+}
+
+/* Estilo para código en línea */
+.markdown-content code {
+  font-family: monospace;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #ffcc00;
+}
+
+/* Estilo para bloques de código */
+.markdown-content pre {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.markdown-content pre code {
+  display: block;
+  padding: 0;
+  background: none;
+}
+
+/* Estilo para listas */
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+/* Estilo para tablas */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px;
+}
+
+.markdown-content th {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: bold;
+}
+
+/* Enlaces */
+.markdown-content a {
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
