@@ -1,4 +1,9 @@
 /* SkillsChart.css */
+h5 {
+  font-size: 2rem;
+  padding-top: 20px;
+  text-decoration: underline;
+}
 .skills-container {
   display: flex;
   width: 100%;

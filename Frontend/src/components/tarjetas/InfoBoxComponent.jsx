@@ -7,9 +7,8 @@ const InfoBoxComponent = ({ subject, tech, info }) => {
     <div className="info-container">
       <div className="info-box">
         <h3 className="info-title">{`${subject}`}</h3>
-        <h5>Info:</h5>
         <p className="info-tech">{info}</p>
-        <h5>Tecnologias:</h5>
+        <h5>Habilidades:</h5>
         <LogoSkill skills={tech}></LogoSkill>
       </div>
     </div>
