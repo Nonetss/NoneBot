@@ -1,0 +1,247 @@
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 70vh;
+  height: 100%;
+  padding: 10px;
+  border: 5px solid #000;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* Botón flotante para abrir/cerrar el chat */
+.chat-toggle-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--color-principal);
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.chat-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #2c3e50;
+  border: 5px solid #000;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.chat-message {
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background: #007bff;
+  color: white;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+  background: #444;
+  color: white;
+}
+
+.chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 5px solid #000;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+  margin-right: 10px;
+  background: #2c3e50;
+}
+
+.chat-input button {
+  margin-left: 5px;
+  padding: 8px;
+  background: var(--color-principal);
+  color: white;
+  border: 5px solid #000;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+/* Ocultar el chat cuando está cerrado */
+.chat-container.hidden {
+  display: none;
+}
+
+.markdown-content {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  color: #ffffff;
+  background: none;
+}
+
+/* Estilo para encabezados */
+.markdown-content h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.markdown-content h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #ffaa00;
+}
+
+.markdown-content h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #ff8800;
+}
+
+/* Estilo para código en línea */
+.markdown-content code {
+  font-family: monospace;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #ffcc00;
+}
+
+/* Estilo para bloques de código */
+.markdown-content pre {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.markdown-content pre code {
+  display: block;
+  padding: 0;
+  background: none;
+}
+
+/* Estilo para listas */
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+/* Estilo para tablas */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px;
+}
+
+.markdown-content th {
+  background: rgba(255, 255, 255, 0.2);
+  font-weight: bold;
+}
+
+/* Enlaces */
+.markdown-content a {
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+.markdown-content a:hover {
+  text-decoration: underline;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .chat-container {
+    max-width: 90%;
+    height: 60vh;
+    margin-bottom: 60px;
+  }
+
+  .chat-toggle-button {
+    bottom: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chat-message {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    width: 95%;
+    max-width: none;
+    right: 5px;
+    bottom: 5px;
+    height: 65vh;
+    border-width: 2px;
+  }
+
+  .chat-toggle-button {
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+  }
+
+  .chat-input {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chat-input input {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .chat-input button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .markdown-content h1 {
+    font-size: 1.3em;
+  }
+  .markdown-content h2 {
+    font-size: 1.1em;
+  }
+  .markdown-content h3 {
+    font-size: 1em;
+  }
+  .markdown-content pre {
+    padding: 6px;
+  }
+}

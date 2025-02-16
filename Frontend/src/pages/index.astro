@@ -5,7 +5,7 @@ import Proyectos from "@components/elementos/Proyectos.astro";
 import Skill from "@components/elementos/Skill.astro";
 import Contacto from "@components/elementos/Contacto.jsx";
 import Footer from "@components/elementos/Footer.astro";
-import SkillsRadarChart from "@components/elementos/SkillRadar.jsx";
+import Chatbot from "@components/chat/chat";
 ---
 
 <Layout title="Antonio Moreno López-Barajas">
@@ -14,4 +14,5 @@ import SkillsRadarChart from "@components/elementos/SkillRadar.jsx";
   <Skill />
   <Contacto client:load />
   <Footer />
+  <Chatbot client:load />
 </Layout>
