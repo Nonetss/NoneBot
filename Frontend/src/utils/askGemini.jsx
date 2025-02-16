@@ -1,6 +1,8 @@
+const URL_API = import.meta.env.VITE_URL_API;
+
 export async function askGemini(prompt) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/ask-gemini", {
+    const response = await fetch(`${URL_API}/ask-gemini`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt }),
