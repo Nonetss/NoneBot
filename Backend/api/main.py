@@ -33,7 +33,7 @@ class ChatRequest(BaseModel):
 async def ask_gemini(request: ChatRequest):
     try:
         model = genai.GenerativeModel(
-            "gemini-1.5-flash"
+            "gemini-2-flash"
         )  # Cambia el modelo si es necesario
         response = model.generate_content(request.prompt)
 
