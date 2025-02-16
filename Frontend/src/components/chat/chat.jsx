@@ -71,7 +71,7 @@ const ChatComponent = () => {
         aria-label="Toggle chat"
       >
         <img
-          src="/src/assets/robot-svgrepo-com.svg"
+          src="/assets/robot-svgrepo-com.svg"
           alt="Chat icon"
           className="h-10 w-10 bg-transparent"
         />
