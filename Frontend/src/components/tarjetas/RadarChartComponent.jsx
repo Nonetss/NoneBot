@@ -43,6 +43,7 @@ const RadarChartComponent = ({
           stroke="#fff"
           strokeWidth={1}
           pointerEvents="none"
+          className="radar-dot"
         />
       </g>
     );
@@ -51,7 +52,14 @@ const RadarChartComponent = ({
   return (
     <div className="chart-container">
       <ResponsiveContainer width="100%" height={500}>
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+        <RadarChart
+          cx="50%"
+          cy="50%"
+          outerRadius="80%"
+          data={data}
+          isAnimationActive={true} // Habilita la animación
+          animationDuration={1000} // Duración de la animación en milisegundos
+        >
           <PolarGrid stroke="#fff" />
           <PolarAngleAxis
             dataKey="subject"
