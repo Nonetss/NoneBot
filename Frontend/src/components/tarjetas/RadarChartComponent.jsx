@@ -1,3 +1,4 @@
+// RadarChartComponent.jsx
 import React from "react";
 import {
   Radar,
@@ -13,26 +14,38 @@ const RadarChartComponent = ({
   activeSubject,
   onMouseEnter,
   onMouseLeave,
+  onClick,
 }) => {
   // Función personalizada para renderizar cada punto del radar
   const renderCustomDot = (props) => {
     const { cx, cy, payload } = props;
-    // Recharts puede anidar la data en payload.payload
     const actualData = payload.payload || payload;
-    // Se marca el punto si el activeSubject coincide con el subject del skill
     const isHovered = activeSubject === actualData.subject;
 
     return (
-      <circle
-        cx={cx}
-        cy={cy}
-        r={isHovered ? 6 : 4}
-        fill={isHovered ? "var(--color-secundario)" : "#ff7300"}
-        stroke="#fff"
-        strokeWidth={1}
-        onMouseEnter={() => onMouseEnter(actualData)}
-        onMouseLeave={() => onMouseLeave(actualData)}
-      />
+      <g>
+        {/* Círculo invisible ampliado para facilitar el hover */}
+        <circle
+          cx={cx}
+          cy={cy}
+          r={10}
+          fill="transparent"
+          onMouseEnter={() => onMouseEnter(actualData)}
+          onMouseLeave={() => onMouseLeave(actualData)}
+          onClick={() => onClick(actualData)}
+          style={{ cursor: "pointer" }}
+        />
+        {/* Círculo visible */}
+        <circle
+          cx={cx}
+          cy={cy}
+          r={isHovered ? 6 : 4}
+          fill={isHovered ? "var(--color-secundario)" : "#ff7300"}
+          stroke="#fff"
+          strokeWidth={1}
+          pointerEvents="none"
+        />
+      </g>
     );
   };
 
