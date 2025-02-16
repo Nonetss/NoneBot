@@ -27,7 +27,13 @@ p {
 .proyectoDescripcion {
   padding-bottom: 20px;
   height: 200px;
-  overflow: hidden;
+  overflow: scroll;
+  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+}
+
+.proyectoDescripcion::-webkit-scrollbar {
+  display: none;
 }
 
 .carouselContainer {
