@@ -15,6 +15,13 @@
   border: solid 5px #000;
   box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
   height: 500px;
+  overflow: scroll;
+  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+}
+
+.info-box::-webkit-scrollbar {
+  display: none;
 }
 
 .info-title {
