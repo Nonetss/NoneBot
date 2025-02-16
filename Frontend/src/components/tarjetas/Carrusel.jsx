@@ -3,7 +3,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 // Conserva tus importaciones de estilos
 import "@styles/tarjetas/CarouselProyectos.css";
-import "./Prueba.css";
 
 export default function Prueba({ proyectos = [] }) {
   // Iniciamos Embla con loop + autoplay
