@@ -21,8 +21,10 @@
       ],      
       "@styles/*": [
         "src/styles/*"
-      ]
-
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
