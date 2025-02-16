@@ -1,0 +1,91 @@
+.chat-container {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 70vh;
+  height: 100%;
+  padding: 10px;
+  border: 5px solid #000;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+/* Botón flotante para abrir/cerrar el chat */
+.chat-toggle-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--color-principal);
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.chat-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: #2c3e50;
+  border: 5px solid #000;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.chat-message {
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background: #007bff;
+  color: white;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+  background: #444;
+  color: white;
+}
+
+.chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 5px solid #000;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+  margin-right: 10px;
+  background: #2c3e50;
+}
+
+.chat-input button {
+  margin-left: 5px;
+  padding: 8px;
+  background: var(--color-principal);
+  color: white;
+  border: 5px solid #000;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+/* Ocultar el chat cuando está cerrado */
+.chat-container.hidden {
+  display: none;
+}
