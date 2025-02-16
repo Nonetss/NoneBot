@@ -8,43 +8,156 @@ const skillsData = [
     subject: "Matemáticas",
     level: 9,
     fullMark: 10,
-    tech: ["Cálculo", "Álgebra", "Ecuaciones Diferenciales"],
+    info: "Mi formación como",
+    tech: [
+      {
+        nombre: "Cálculo",
+        nivel: 85,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Álgebra",
+        nivel: 90,
+        imagen: "https://via.placeholder.com/50",
+      },
+    ],
   },
   {
     subject: "Física",
     level: 8,
     fullMark: 10,
-    tech: ["Simulaciones", "Modelado", "Mecánica Cuántica"],
+    info: "Mi experiencia en",
+    tech: [
+      {
+        nombre: "Simulaciones",
+        nivel: 80,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Modelado",
+        nivel: 85,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Mecánica Cuántica",
+        nivel: 75,
+        imagen: "https://via.placeholder.com/50",
+      },
+    ],
   },
   {
     subject: "Backend",
     level: 9,
     fullMark: 10,
-    tech: ["Python", "FastAPI", "Django", "SQLite", "PostgreSQL"],
+    info: "Mi especialización en",
+    tech: [
+      {
+        nombre: "Python",
+        nivel: 90,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "FastAPI",
+        nivel: 85,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Django",
+        nivel: 88,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "SQLite",
+        nivel: 80,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "PostgreSQL",
+        nivel: 85,
+        imagen: "https://via.placeholder.com/50",
+      },
+    ],
   },
   {
     subject: "Frontend",
     level: 7,
     fullMark: 10,
-    tech: ["React", "Next.js", "Astro", "TailwindCSS"],
+    info: "Mi experiencia en",
+    tech: [
+      {
+        nombre: "React",
+        nivel: 85,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Next.js",
+        nivel: 80,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Astro",
+        nivel: 75,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "TailwindCSS",
+        nivel: 82,
+        imagen: "https://via.placeholder.com/50",
+      },
+    ],
   },
   {
     subject: "IA",
     level: 8,
     fullMark: 10,
-    tech: ["LangChain", "Ollama", "NLP", "Embeddings"],
+    info: "Mi conocimiento en",
+    tech: [
+      {
+        nombre: "LangChain",
+        nivel: 80,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Ollama",
+        nivel: 75,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "NLP",
+        nivel: 85,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Embeddings",
+        nivel: 82,
+        imagen: "https://via.placeholder.com/50",
+      },
+    ],
   },
   {
     subject: "SysAdmin",
     level: 7,
     fullMark: 10,
-    tech: ["Ingeniería Inversa", "Malware Analysis"],
+    info: "Mi experiencia en",
+    tech: [
+      {
+        nombre: "Ingeniería Inversa",
+        nivel: 80,
+        imagen: "https://via.placeholder.com/50",
+      },
+      {
+        nombre: "Malware Analysis",
+        nivel: 75,
+        imagen: "https://via.placeholder.com/50",
+      },
+    ],
   },
 ];
 
 const SkillsRadarChart = () => {
   const [hoveredSubject, setHoveredSubject] = useState(null);
   const [hoveredTech, setHoveredTech] = useState(null);
+  const [hoveredInfo, setHoveredInfo] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Rotación automática cada 3 segundos cuando no hay hover
@@ -61,6 +174,7 @@ const SkillsRadarChart = () => {
   const handleMouseEnter = (data) => {
     setHoveredSubject(data.subject);
     setHoveredTech(data.tech);
+    setHoveredInfo(data.info);
   };
 
   // Al salir del hover, limpiamos ambos valores
@@ -73,6 +187,7 @@ const SkillsRadarChart = () => {
   const rotatingSkill = skillsData[currentIndex];
   const activeSubject = hoveredSubject || rotatingSkill.subject;
   const displayedTech = hoveredTech || rotatingSkill.tech;
+  const displayedInfo = hoveredInfo || rotatingSkill.info;
 
   return (
     <div className="skills-container">
@@ -82,7 +197,11 @@ const SkillsRadarChart = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       />
-      <InfoBoxComponent subject={activeSubject} tech={displayedTech} />
+      <InfoBoxComponent
+        subject={activeSubject}
+        tech={displayedTech}
+        info={displayedInfo}
+      />
     </div>
   );
 };
