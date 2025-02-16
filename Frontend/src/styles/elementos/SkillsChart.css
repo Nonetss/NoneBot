@@ -1,0 +1,26 @@
+/* SkillsChart.css */
+.skills-container {
+  display: flex;
+  width: 100%;
+}
+.chart-container {
+  width: 50%;
+}
+
+.info-container {
+  padding-left: 1rem;
+  width: 50%;
+  padding: 20px;
+}
+
+.info-box {
+  padding: 1rem;
+  border: solid 5px #000;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
+  height: 500px;
+}
+
+.info-title {
+  margin-bottom: 0.5rem;
+  text-decoration: underline;
+}
