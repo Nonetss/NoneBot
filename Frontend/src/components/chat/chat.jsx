@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm"; // Soporte para listas, tablas, enlaces...
 import "./ChatComponent.css"; // Asegúrate de definir los estilos
 import { askGemini } from "@utils/askGemini";
-import ROBOT from "@img/robot-svgrepo-com.svg";
 
 const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
@@ -71,7 +70,11 @@ const ChatComponent = () => {
         transition={{ type: "spring", stiffness: 300 }}
         aria-label="Toggle chat"
       >
-        <img src={ROBOT} alt="Chat icon" className="h-10 w-10 bg-transparent" />
+        <img
+          src="/assets/robot-svgrepo-com.svg"
+          alt="Chat icon"
+          className="h-10 w-10 bg-transparent"
+        />
       </motion.button>
 
       <AnimatePresence>
