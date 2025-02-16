@@ -17,6 +17,11 @@ h5 {
   padding: 20px;
   width: 100%;
 }
+.radar-dot {
+  transition:
+    r 0.3s ease,
+    fill 0.3s ease;
+}
 
 /* Cuadro de información */
 .info-box {
