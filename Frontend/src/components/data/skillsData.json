@@ -1,0 +1,155 @@
+[
+  {
+    "subject": "Ciencias",
+    "level": 9,
+    "fullMark": 10,
+    "info": "He estudiado la carrera de Física, lo que me ha proporcionado una sólida formación en diversas áreas del conocimiento. Durante mis estudios, adquirí un profundo entendimiento de la mecánica clásica, el electromagnetismo, la termodinámica y la física cuántica. Además, he trabajado con métodos numéricos, modelado computacional y simulaciones físicas para resolver problemas complejos. Esta formación me ha permitido desarrollar habilidades analíticas, pensamiento crítico y la capacidad de aplicar conceptos matemáticos avanzados en diferentes contextos.",
+    "tech": [
+      {
+        "nombre": "Matemáticas",
+        "nivel": 85,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Integral_example.svg/640px-Integral_example.svg.png"
+      },
+      {
+        "nombre": "Física",
+        "nivel": 90,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Quantum_mechanics.svg/640px-Quantum_mechanics.svg.png"
+      }
+    ]
+  },
+  {
+    "subject": "Programación",
+    "level": 9,
+    "fullMark": 10,
+    "info": "Aunque no tengo una formación reglada en programación, es una de mis pasiones. A lo largo de los años, he adquirido un conocimiento sólido en múltiples lenguajes y paradigmas de programación, desde scripting con Python y Bash hasta desarrollo web con JavaScript. También me he interesado en el desarrollo de sistemas de bajo nivel con Rust y C, explorando temas como gestión de memoria, concurrencia y optimización de código. Me apasiona el diseño de software eficiente, las estructuras de datos, la automatización de tareas y la creación de herramientas que resuelvan problemas de manera efectiva.",
+    "tech": [
+      {
+        "nombre": "Python",
+        "nivel": 90,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/640px-Python-logo-notext.svg.png"
+      },
+      {
+        "nombre": "Bash",
+        "nivel": 80,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Bash_logo.svg/640px-Bash_logo.svg.png"
+      },
+      {
+        "nombre": "JavaScript",
+        "nivel": 85,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/640px-Unofficial_JavaScript_logo_2.svg.png"
+      },
+      {
+        "nombre": "Git",
+        "nivel": 75,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-icon.svg/640px-Git-icon.svg.png"
+      }
+    ]
+  },
+  {
+    "subject": "Backend",
+    "level": 9,
+    "fullMark": 10,
+    "info": "Debido a que Python es el lenguaje que más domino y gracias a su versatilidad, casi siempre he trabajado en el desarrollo backend utilizando este lenguaje. He desarrollado APIs REST y GraphQL con frameworks como FastAPI y Django, integrando bases de datos relacionales como SQLite y PostgreSQL. Además, tengo experiencia en autenticación con JWT, WebSockets, gestión de sesiones y optimización de rendimiento en aplicaciones web. Me interesa el diseño de arquitecturas escalables, la seguridad en las aplicaciones y la integración eficiente de bases de datos.",
+    "tech": [
+      {
+        "nombre": "FastAPI",
+        "nivel": 85,
+        "imagen": "https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png"
+      },
+      {
+        "nombre": "Django",
+        "nivel": 88,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Django-logo-negative.svg/640px-Django-logo-negative.svg.png"
+      },
+      {
+        "nombre": "SQL",
+        "nivel": 80,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/640px-Postgresql_elephant.svg.png"
+      }
+    ]
+  },
+  {
+    "subject": "Frontend",
+    "level": 7,
+    "fullMark": 10,
+    "info": "Tengo experiencia en el desarrollo frontend, creando interfaces modernas y optimizadas con tecnologías como React, Next.js y Astro. Me interesa construir aplicaciones web dinámicas y eficientes, asegurando un diseño atractivo y accesible. He trabajado con TailwindCSS para estilizar componentes de manera rápida y flexible, y he implementado tanto Single Page Applications (SPAs) como Server-Side Rendering (SSR) para mejorar el rendimiento y la experiencia de usuario.",
+    "tech": [
+      {
+        "nombre": "HTML",
+        "nivel": 90,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/640px-HTML5_logo_and_wordmark.svg.png"
+      },
+      {
+        "nombre": "CSS",
+        "nivel": 85,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/640px-CSS3_logo_and_wordmark.svg.png"
+      },
+      {
+        "nombre": "React",
+        "nivel": 85,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/640px-React-icon.svg.png"
+      },
+      {
+        "nombre": "Next.js",
+        "nivel": 80,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/640px-Nextjs-logo.svg.png"
+      },
+      {
+        "nombre": "Astro",
+        "nivel": 75,
+        "imagen": "/assets/astro.svg"
+      }
+    ]
+  },
+  {
+    "subject": "IA",
+    "level": 8,
+    "fullMark": 10,
+    "info": "La inteligencia artificial es una de mis mayores pasiones. Me interesa tanto su aplicación práctica como el desarrollo de nuevas soluciones basadas en modelos de aprendizaje automático. He trabajado con modelos de NLP, embeddings y generación de texto utilizando LangChain y Ollama. Además, he explorado la integración de RAG, la optimización de inferencias y el uso de modelos preentrenados para análisis de datos y generación de contenido. También tengo experiencia con modelos de IA generativa y frameworks como ComfyUI para la creación y manipulación de imágenes mediante redes neuronales avanzadas.",
+    "tech": [
+      {
+        "nombre": "LangChain",
+        "nivel": 80,
+        "imagen": "https://langchain.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flangchain-logo.7f699547.png&w=384&q=75"
+      },
+      {
+        "nombre": "Ollama",
+        "nivel": 75,
+        "imagen": "https://ollama.ai/static/logo-089d54a4.svg"
+      },
+      {
+        "nombre": "OpenAI",
+        "nivel": 85,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/OpenAI_Logo.svg/640px-OpenAI_Logo.svg.png"
+      },
+      {
+        "nombre": "ComfyUI",
+        "nivel": 82,
+        "imagen": "https://github.com/comfyanonymous/ComfyUI/raw/main/docs/source/images/logo.png"
+      }
+    ]
+  },
+  {
+    "subject": "SysAdmin",
+    "level": 7,
+    "fullMark": 10,
+    "info": "Soy un apasionado de Linux y la administración de sistemas. He trabajado con diferentes distribuciones como Arch, Debian y Ubuntu, optimizando servidores y automatizando tareas con Bash y Ansible. Me interesa la eficiencia y seguridad en la administración de sistemas, asegurando que los entornos sean estables y escalables. También tengo experiencia en la implementación y gestión de infraestructuras con Docker y Kubernetes, así como en el despliegue y mantenimiento de servidores web con Nginx. Además, he trabajado con servicios en la nube como AWS, configurando entornos seguros y optimizados para diversas aplicaciones.",
+    "tech": [
+      {
+        "nombre": "Docker",
+        "nivel": 85,
+        "imagen": "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/97_Docker_logo_logos-512.png"
+      },
+      {
+        "nombre": "AWS",
+        "nivel": 85,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/640px-Amazon_Web_Services_Logo.svg.png"
+      },
+      {
+        "nombre": "Nginx",
+        "nivel": 80,
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/640px-Nginx_logo.svg.png"
+      }
+    ]
+  }
+]
