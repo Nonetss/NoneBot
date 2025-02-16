@@ -4,32 +4,53 @@ h5 {
   padding-top: 20px;
   text-decoration: underline;
 }
+
+/* Contenedor principal */
 .skills-container {
   display: flex;
   width: 100%;
   flex-direction: column;
 }
 
+/* Contenedor de la info */
 .info-container {
-  padding-left: 1rem;
   padding: 20px;
+  width: 100%;
 }
 
+/* Cuadro de información */
 .info-box {
-  padding: 20px 40px;
+  padding: 10px 20px;
   border: solid 5px #000;
   box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.9);
-  height: 500px;
+  height: 540px;
+  display: flex;
+  flex-direction: column;
   overflow: scroll;
-  scrollbar-width: none; /* Para Firefox */
-  -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer y Edge */
 }
 
+/* Oculta la barra de desplazamiento en Webkit */
 .info-box::-webkit-scrollbar {
   display: none;
 }
 
+/* Título de la información */
 .info-title {
   margin-bottom: 0.5rem;
   text-decoration: underline;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  h5 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h5 {
+    font-size: 1.2rem;
+  }
 }

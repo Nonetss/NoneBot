@@ -1,4 +1,3 @@
-// RadarChartComponent.jsx
 import React from "react";
 import {
   Radar,
@@ -16,7 +15,7 @@ const RadarChartComponent = ({
   onMouseLeave,
   onClick,
 }) => {
-  // Función personalizada para renderizar cada punto del radar
+  // Función para renderizar cada punto del radar
   const renderCustomDot = (props) => {
     const { cx, cy, payload } = props;
     const actualData = payload.payload || payload;
@@ -57,13 +56,14 @@ const RadarChartComponent = ({
           <PolarAngleAxis
             dataKey="subject"
             stroke="#fff"
-            radius={1.5}
             tick={({ payload, x, y, textAnchor, index }) => {
               const totalLabels = data.length;
               const angle = (2 * Math.PI * index) / totalLabels - Math.PI / 2;
-              const offset = 20;
+              const offset = window.innerWidth < 768 ? 10 : 20; // Ajuste en móviles
+              const fontSize = window.innerWidth < 768 ? 12 : 16; // Fuente adaptable
               const dx = offset * Math.cos(angle);
               const dy = offset * Math.sin(angle);
+
               return (
                 <text
                   x={x}
@@ -72,7 +72,7 @@ const RadarChartComponent = ({
                   dy={dy}
                   textAnchor={textAnchor}
                   fill="#fff"
-                  fontSize={20}
+                  fontSize={fontSize}
                 >
                   {payload.value}
                 </text>
