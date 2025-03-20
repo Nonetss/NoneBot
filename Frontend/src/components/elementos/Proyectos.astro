@@ -2,13 +2,14 @@
 import Carrusel from "@components/tarjetas/CarouselProyectos.jsx";
 import Prueba from "@components/tarjetas/Carrusel.jsx";
 
+
 const proyectos = [
   {
     nombre: "Newsletter Summarizer",
     imgEnlace: "/assets/newsletter.jpg",
     titulo: "NoneLetterSummarizer",
     descripcion:
-      "Newsletter Summarizer es una aplicación que automatiza la recopilación, almacenamiento y análisis de newsletters. El sistema permite recibir newsletters vía IMAP, almacenarlas en una base de datos, y generar resúmenes automáticos utilizando Gemini AI.",
+      "Newsletter Summarizer es una aplicación que automatiza la recopilación, almacenamiento y análisis de newsletters. El sistema permite recibir newsletters vía IMAP, almacenarlas en una base de datos y generar resúmenes automáticos utilizando Gemini AI.",
     enlaceProyecto: "https://github.com/Nonetss/NoneLetterSummarizer",
   },
   {
@@ -16,24 +17,34 @@ const proyectos = [
     imgEnlace: "/assets/whisper.jpg",
     titulo: "NoneAudio",
     descripcion:
-      "Aplicación que permite a los usuarios procesar audios de forma eficiente desde una interfaz web. Los usuarios pueden subir audios o grabar directamente desde su micrófono, tras lo cual el sistema realiza las siguientes acciones: Transcripción de Audio: Convierte el audio en texto utilizando el modelo Whisper. Generación de Resúmenes: Procesa la transcripción con Ollama, un modelo de lenguaje avanzado, para generar un resumen estructurado. Almacenamiento: Guarda los archivos de audio, transcripciones y resúmenes en el servidor de manera organizada.",
+      "Aplicación que permite a los usuarios procesar audios de forma eficiente desde una interfaz web. Los usuarios pueden subir audios o grabar directamente desde su micrófono, tras lo cual el sistema realiza las siguientes acciones: Transcripción de Audio con Whisper, generación de resúmenes con Ollama y almacenamiento estructurado de archivos.",
     enlaceProyecto: "https://github.com/Nonetss/NoneAudio",
-  },
-  {
-    nombre: "Audio Player with Text-to-Speech",
-    imgEnlace: "/assets/link-arrow.svg",
-    titulo: "NoneReading",
-    descripcion:
-      "Este proyecto es una aplicación en C++ que permite convertir texto del portapapeles en audio utilizando la API de gTTS (Google Text-to-Speech). El texto se lee desde el portapapeles y se convierte en audio, que luego se reproduce utilizando la herramienta play.",
-    enlaceProyecto: "https://github.com/Nonetss/NoneReading",
   },
   {
     nombre: "RaptureAcademy",
     imgEnlace: "/assets/raptura.jpg",
     titulo: "RaptureAcademy",
     descripcion:
-      "Accede a exámenes PAU resueltos, organizados por asignaturas y comunidades autónomas + Sigue practicando con exámenes EXTRA para que domines cada tema",
+      "Accede a exámenes PAU resueltos, organizados por asignaturas y comunidades autónomas. Practica con exámenes extra para reforzar cada tema.",
     enlaceProyecto: "https://www.raptureacademy.es/",
+  },
+  {
+    nombre: "Contract Summarization",
+    imgEnlace: "https://app-cdn.readytensor.ai/publications/resources/hubId=4115/publicationId=1554/screenshot_06032025_174504.jpg?Expires=1742494869&Key-Pair-Id=K2V2TN6YBJQHTG&Signature=C9wv3xwFfPHoHZP-iJfV5V78EyNcz0BId0~VXEaUxBpbj-etDfIeAgO2PaCy8NQV5EFm9b4Wzv51ADzxlIDkOqeltAquPtQE4970mcbBFfScByFIAufAgKBzfmq~f0HPqrxF2xROc8OyYtL8X-xtKXgBQvuHLsstAFcW-sM34rWNcSBIKRfmtmUta9EZVs0p-cEEoBOrEAEYh18-EuUX46zMIIp3he1eW53XdHPHn~Hai1BL8i1VvSAkeVxMJcK0gTelY2wcYLoytZEw4bZJMVLYmL6LebSL7aXZ7jKdWcTWvISiI2tkGMEIh3s2z8Gz2LRhiqog9sSrgi4l5xLplQ__",
+    titulo: "Contract Summarization",
+    descripcion:
+      "Sistema de IA que filtra y resume contratos públicos, reduciendo el tiempo de análisis para empresas interesadas en licitaciones. Implementado con FastAPI, LangChain y Gemini AI.",
+    enlaceProyecto:
+      "https://app.readytensor.ai/publications/ai-powered-contract-summarization-automating-public-procurement-analysis-with-llms-Rof388LAClHV",
+  },
+  {
+    nombre: "Telegram Bot for Smart Calendar",
+    imgEnlace: "https://app-cdn.readytensor.ai/publications/resources/hubId=4115/publicationId=1649/screenshot_18032025_134902.jpg?Expires=1742498265&Key-Pair-Id=K2V2TN6YBJQHTG&Signature=lIpAl98VR3cnW2k~iiS2Q-91uKdit1AZDA2tsGi3qj3NDqYPnIWIGjUhgksHokCJqHBbSajZyXDaXLMaZZr~-lYDQqD-Z~vyExS9LSRHfDZcqVT7VcaBCC-3SvOXCe3F7MSI86hQB-ccdW~4p3~B4NNzl-5ovZAs7QjqZcsZREH75PkGz7YUqGnHCEp-UxFRuqreJIy2WYh8RceKtKOT8OsI87~KfS4KT7i0EA5BlGYOr6m3hLLRxGK-MPVxraGWKapc9cGEgQFrMJewi4JIqnyHWrEezskQkfcmE53nF7rLavoQ9XHo2wT4VqiP-RRmaFljCDH7LEFVcd4K15jcnA__",
+    titulo: "Telegram Bot for Smart Calendar",
+    descripcion:
+      "Bot de Telegram que permite gestionar eventos de calendario mediante comandos de lenguaje natural. Utiliza FastAPI, LangChain y LangGraph para la interpretación y gestión inteligente de eventos en Nextcloud.",
+    enlaceProyecto:
+      "https://app.readytensor.ai/publications/ai-powered-telegram-bot-for-smart-calendar-management-plsXECdPbF9Q",
   },
 ];
 ---
