@@ -8,12 +8,12 @@
       {
         "nombre": "Matemáticas",
         "nivel": 85,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Integral_example.svg/640px-Integral_example.svg.png"
+        "imagen": "https://static.vecteezy.com/system/resources/previews/021/373/017/non_2x/math-icon-for-your-website-mobile-presentation-and-logo-design-free-vector.jpg"
       },
       {
         "nombre": "Física",
         "nivel": 90,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Quantum_mechanics.svg/640px-Quantum_mechanics.svg.png"
+        "imagen": "https://cdn-icons-png.flaticon.com/512/5363/5363328.png"
       }
     ]
   },
@@ -31,7 +31,7 @@
       {
         "nombre": "Bash",
         "nivel": 80,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Bash_logo.svg/640px-Bash_logo.svg.png"
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Bash_Logo_White.svg/2048px-Bash_Logo_White.svg.png"
       },
       {
         "nombre": "JavaScript",
@@ -41,7 +41,7 @@
       {
         "nombre": "Git",
         "nivel": 75,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-icon.svg/640px-Git-icon.svg.png"
+        "imagen": "https://manuel.cillero.es/wp-content/uploads/2020/07/git-logo.png"
       }
     ]
   },
@@ -59,7 +59,7 @@
       {
         "nombre": "Django",
         "nivel": 88,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Django-logo-negative.svg/640px-Django-logo-negative.svg.png"
+        "imagen": "https://static-00.iconduck.com/assets.00/django-icon-1606x2048-lwmw1z73.png"
       },
       {
         "nombre": "SQL",
@@ -110,22 +110,22 @@
       {
         "nombre": "LangChain",
         "nivel": 80,
-        "imagen": "https://langchain.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flangchain-logo.7f699547.png&w=384&q=75"
+        "imagen": "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/langchain.png"
       },
       {
         "nombre": "Ollama",
         "nivel": 75,
-        "imagen": "https://ollama.ai/static/logo-089d54a4.svg"
+        "imagen": "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/ollama.png"
       },
       {
         "nombre": "OpenAI",
         "nivel": 85,
-        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/OpenAI_Logo.svg/640px-OpenAI_Logo.svg.png"
+        "imagen": "https://static-00.iconduck.com/assets.00/openai-icon-2021x2048-4rpe5x7n.png"
       },
       {
         "nombre": "ComfyUI",
         "nivel": 82,
-        "imagen": "https://github.com/comfyanonymous/ComfyUI/raw/main/docs/source/images/logo.png"
+        "imagen": "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/comfyui.png"
       }
     ]
   },
